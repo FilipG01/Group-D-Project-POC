@@ -1,0 +1,137 @@
+.about-preview-section {
+    position: relative;
+    min-height: 550px;
+
+    display: flex;
+    align-items: center;
+
+    background-image: url("https://images.unsplash.com/photo-1448375240586-882707db888b");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+.about-preview-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    rgba(79, 93, 80, 0.12) 0%,
+                    rgba(79, 93, 80, 0.35) 25%,
+                    rgba(79, 93, 80, 0.78) 55%,
+                    rgba(79, 93, 80, 0.92) 100%
+            );
+
+    z-index: 1;
+}
+
+.about-preview-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 720px;
+
+    margin-left: auto;
+
+    padding: 90px 8%;
+
+    color: #F5F0E6;
+
+    text-align: left;
+}
+
+.about-preview-label {
+    color: #DDBE7D;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.15em;
+
+    margin-bottom: 20px;
+}
+
+.about-preview-content h2 {
+    font-family: Georgia, serif;
+
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+
+    font-weight: 400;
+
+    line-height: 1.1;
+
+    margin-bottom: 30px;
+}
+
+.about-preview-text {
+    font-size: 18px;
+
+    line-height: 1.9;
+
+    max-width: 600px;
+
+    margin-bottom: 40px;
+}
+
+.about-preview-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+
+    padding: 16px 30px;
+
+    border-radius: 999px;
+
+    background: #DDC4AD;
+
+    color: #5A645B;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: all 0.25s ease;
+}
+
+.about-preview-button:hover {
+    background: #DDBE7D;
+    color: #1F1F1F;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .about-preview-section {
+        min-height: 520px;
+    }
+
+    .about-preview-section::before {
+        background: rgba(79, 93, 80, 0.82);
+    }
+
+    .about-preview-content {
+        padding: 70px 8%;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-preview-section {
+        min-height: 560px;
+    }
+
+    .about-preview-content {
+        padding: 60px 6%;
+    }
+
+    .about-preview-text {
+        font-size: 16px;
+    }
+}
