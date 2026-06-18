@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: root-therapy-backend
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/root_therapy}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+
+server:
+  port: 8080
+
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        secure: false
+        same-site: lax
