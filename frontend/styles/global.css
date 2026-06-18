@@ -103,6 +103,7 @@ body,
 
 .service-card {
     flex: 0 1 calc((100% - 4rem) / 3);
+    text-align: justify;
     min-width: 260px;
     padding: 2.25rem;
     background: #e3d7c1;

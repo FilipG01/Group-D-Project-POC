@@ -40,15 +40,11 @@
 
 .tree-line {
     fill: none;
-
     stroke: #6b3e02;
     stroke-width: 2.8;
-
     stroke-linecap: round;
-
     stroke-dasharray: 300;
     stroke-dashoffset: 300;
-
     animation: none;
 }
 
@@ -67,28 +63,18 @@
 
 .service-leaf {
     position: absolute;
-
     transform: translate(-50%, -50%) scale(0.8);
-
     padding: 14px 22px;
-
     background: #e6d4bc;
     color: #435042;
-
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-
     border: 1px solid rgba(255,255,255,0.25);
-
     border-radius: 999px;
-
     text-decoration: none;
     font-weight: 700;
     font-size: 15px;
-
     opacity: 0;
-
     animation: none;
-
     transition:
             transform 0.25s ease,
             background-color 0.25s ease;
@@ -104,18 +90,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     width: fit-content;
-
     margin: 50px auto 0;
-
     padding: 16px 30px;
-
     background: #DDC4AD;
     color: #5A645B;
-
     border-radius: 999px;
-
     font-weight: 700;
     text-decoration: none;
 }
@@ -126,11 +106,8 @@
 
 .tree-canopy {
     fill: #7b8977;
-
     opacity: 0;
-
     transform-origin: center;
-
     animation: none;
 }
 
@@ -175,10 +152,8 @@
     display: grid;
     grid-template-columns: 1fr 0fr;
     align-items: center;
-
     max-width: 1400px;
     margin: 0 auto;
-
     transition: all 0.45s ease;
 }
 
@@ -189,7 +164,6 @@
 .tree-area {
     display: flex;
     justify-content: center;
-
     transition: transform 0.45s ease;
 }
 
@@ -201,24 +175,15 @@
 
 .service-detail-panel {
     min-height: 550px;
-
     background: #E0DEC5;
-
     border-radius: 40px 40px 40px 40px;
-
     padding: 40px;
-
     color: #4F5D50;
-
     box-shadow:
             -15px 0 40px rgba(0,0,0,0.12);
-
     opacity: 0;
-
     transform: translateX(120%);
-
     pointer-events: none;
-
     transition:
             transform 0.45s ease,
             opacity 0.45s ease;
@@ -233,23 +198,16 @@
 .panel-close-button {
     width: 42px;
     height: 42px;
-
     margin-left: auto;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border: none;
     border-radius: 50%;
-
     background: #5A645B;
     color: #F5F0E6;
-
     font-size: 28px;
-
     cursor: pointer;
-
     transition: all 0.25s ease;
 }
 
@@ -260,50 +218,35 @@
 
 .panel-label {
     margin-top: 35px;
-
     color: #A98245;
-
     font-weight: 700;
-
     letter-spacing: 0.15em;
-
     text-transform: uppercase;
 }
 
 .service-detail-panel h3 {
     margin: 18px 0;
-
     font-family: Georgia, serif;
-
     font-size: clamp(2rem, 3vw, 3.2rem);
-
     font-weight: 400;
-
     line-height: 1;
 }
 
 .service-detail-panel p {
+    text-align: justify;
     font-size: 18px;
     line-height: 1.7;
 }
 
 .panel-services-link {
     display: inline-flex;
-
     margin-top: 30px;
-
     padding: 14px 24px;
-
     background: #DDC4AD;
-
     color: #5A645B;
-
     border-radius: 999px;
-
     font-weight: 700;
-
     text-decoration: none;
-
     transition: all 0.25s ease;
 }
 
