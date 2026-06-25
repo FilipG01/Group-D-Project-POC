@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/auth/register/client
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123",
+  "firstName": "Test",
+  "lastName": "User",
+  "phoneNumber": "123456789"
+}
