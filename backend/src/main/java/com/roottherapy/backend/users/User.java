@@ -28,7 +28,7 @@ public class User {
     private String passwordHash;
 
     @Column(name = "first_name", nullable = false, length = 100)
-    private String fisrtName;
+    private String firstName;
 
     @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
@@ -42,7 +42,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "account_status", nullable = false, length = 30)
-    private AccountStatus accountStatus;
+    private AccountStatus accountStatus = AccountStatus.ACTIVE;
 
     @Column(name = "last_login_at")
     private Instant lastLoginAt;
@@ -56,6 +56,13 @@ public class User {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Instant updatedAt;
 
-
+    public User(String email, String passwordHash, String firstName, String lastName, UserRole role){
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.accountStatus = AccountStatus.ACTIVE;
+    }
 
 }
