@@ -1,6 +1,7 @@
 package com.roottherapy.backend.auth;
 
 
+import com.roottherapy.backend.auth.dto.LoginRequest;
 import com.roottherapy.backend.auth.dto.RegisterClientRequest;
 import com.roottherapy.backend.users.dto.UserResponse;
 import jakarta.validation.Valid;
@@ -20,5 +21,10 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse registerClient(@Valid @RequestBody RegisterClientRequest request){
         return authService.registerClient(request);
+    }
+
+    @PostMapping("/login")
+    public UserResponse login(@Valid @RequestBody LoginRequest request){
+        return authService.login(request);
     }
 }
