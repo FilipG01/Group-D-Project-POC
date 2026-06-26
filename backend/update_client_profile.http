@@ -1,0 +1,8 @@
+PUT http://localhost:8080/api/client-profile/me
+Content-Type: application/json
+
+{
+    "dateOfBirth": "2000-01-01",
+    "therapyGoalsSummary": "I want to feel better",
+    "preferredContactMethod": "IN_APP"
+}
