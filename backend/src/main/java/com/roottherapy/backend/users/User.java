@@ -1,6 +1,9 @@
 package com.roottherapy.backend.users;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
 import lombok.Getter;
@@ -15,7 +18,10 @@ import lombok.AccessLevel;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
