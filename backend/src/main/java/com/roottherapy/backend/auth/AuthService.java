@@ -65,6 +65,7 @@ public class AuthService {
                 )
 
         );
+            // stores the authenticated user in the http session for requests to use later, e.g., "/me"
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
                 context.setAuthentication(authentication);
                 SecurityContextHolder.setContext(context);

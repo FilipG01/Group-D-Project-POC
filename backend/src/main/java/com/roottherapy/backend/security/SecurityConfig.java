@@ -36,6 +36,7 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
+    // allows spring security context to persist into the jdbc http session
     @Bean
     public SecurityContextRepository securityContextRepository() {
         return new HttpSessionSecurityContextRepository();

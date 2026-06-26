@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-
+//adapts the user entity to spring security UserDetails contract
 public class CustomUserDetails implements UserDetails, Serializable {
 
     private final User user;
