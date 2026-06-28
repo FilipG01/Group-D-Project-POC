@@ -1,0 +1,10 @@
+PUT http://localhost:8080/api/therapist-profile/me
+Content-Type: application/json
+
+{
+  "qualifications": "MSc Counselling Psychology, IACP accredited",
+  "registrationNumber": "THER-001",
+  "yearsExperience": 5,
+  "bio": "I support clients with anxiety, stress, and life transitions.",
+  "acceptingClients": true
+}
