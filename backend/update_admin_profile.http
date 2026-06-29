@@ -1,0 +1,7 @@
+PUT http://localhost:8080/api/admin-profile/me
+Content-Type: application/json
+
+{
+  "jobTitle": "Platform Administrator",
+  "department": "Operations"
+}
