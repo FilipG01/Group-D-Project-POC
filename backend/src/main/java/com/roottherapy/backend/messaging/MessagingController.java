@@ -1,0 +1,32 @@
+package com.roottherapy.backend.messaging;
+
+import com.roottherapy.backend.messaging.dto.ConversationResponse;
+import com.roottherapy.backend.messaging.dto.StartConversationRequest;
+import com.roottherapy.backend.security.CustomUserDetails;
+import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/message/")
+public class MessagingController {
+    private final MessagingService messagingService;
+
+    public MessagingController(MessagingService messagingService) {
+        this.messagingService = messagingService;
+    }
+
+    @PostMapping("/conversations")
+     public ConversationResponse startConversation(Authentication auth, @Valid @RequestBody StartConversationRequest req){
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        return messagingService.startConversation(userDetails.getUser(), req);
+    }
+
+    @GetMapping("/conversations")
+    public List<ConversationResponse> listMyConversations(Authentication auth){
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        return messagingService.listMyConversations(userDetails.getUser());
+    }
+}
