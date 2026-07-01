@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/message/conversations
+Content-Type: application/json
+
+{
+    "therapistUserId": "a9b71920-b34a-4a57-b80e-dcba41032399"
+}
+
