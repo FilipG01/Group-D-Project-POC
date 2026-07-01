@@ -33,7 +33,7 @@ public class MessagingController {
         return messagingService.listMyConversations(userDetails.getUser());
     }
 
-    @GetMapping("/conversations/{conversationId/messages")
+    @GetMapping("/conversations/{conversationId}/messages")
     public List<MessageResponse> listMessage(Authentication auth, @PathVariable UUID conversationId){
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         return messagingService.listMessages(userDetails.getUser(), conversationId);
