@@ -1,0 +1,168 @@
+.about-page {
+    background: #f5f0e6;
+    color: #2f352f;
+}
+
+.about-hero {
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 8%;
+    background:
+            linear-gradient(
+                    90deg,
+                    rgba(245,240,230,0.95) 0%,
+                    rgba(245,240,230,0.82) 45%,
+                    rgba(245,240,230,0.2) 100%
+            ),
+            url("https://images.unsplash.com/photo-1621854599844-b46c05f974ce?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+            center/cover;
+}
+
+.about-hero-content {
+    max-width: 680px;
+}
+
+.about-hero h1 {
+    max-width: 620px;
+    margin-bottom: 1.5rem;
+
+    font-weight: 500;
+    line-height: 1.1;
+    color: #4f5d50;
+    font-size: clamp(2.8rem, 6vw, 5.8rem);
+}
+
+.about-hero p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.about-intro {
+    padding: 6rem 8% 3rem;
+    text-align: center;
+}
+
+.about-intro h2 {
+    margin: 0 0 1.5rem;
+
+    font-weight: 500;
+    line-height: 1.1;
+    color: #4f5d50;
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-intro p {
+    max-width: 750px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #4d5149;
+}
+
+.therapist-section {
+    padding: 6rem 8%;
+}
+
+.therapist-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.therapist-image {
+    flex: 0 0 320px;
+    margin-right: 0.5rem;
+}
+
+.therapist-image img {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 1.5rem;
+    box-shadow: 0 18px 45px rgba(47, 53, 47, 0.08);
+}
+
+.therapist-text-card {
+    flex: 1;
+    max-width: 600px;
+    padding: 2.5rem;
+
+    background: #e3d7c1;
+    border: 1px solid rgba(79, 93, 80, 0.18);
+    border-radius: 1.5rem;
+
+    box-shadow: 0 18px 45px rgba(47, 53, 47, 0.08);
+
+    transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            background 0.25s ease;
+}
+
+.therapist-text-card:hover {
+    transform: translateY(-4px);
+    background: #eadfca;
+    box-shadow: 0 22px 55px rgba(47, 53, 47, 0.12);
+}
+
+.therapist-text-card h2 {
+    margin: 1rem 0;
+
+    color: #4f5d50;
+    text-align: center;
+}
+
+.therapist-text-card p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.therapist-text-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+
+    .therapist-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .therapist-image {
+        margin-right: 0;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .about-hero {
+        min-height: auto;
+        padding: 5rem 6%;
+    }
+
+    .about-intro,
+    .therapist-section {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .therapist-image img {
+        width: 260px;
+        height: 260px;
+    }
+
+    .therapist-text-card {
+        padding: 2rem;
+    }
+}
