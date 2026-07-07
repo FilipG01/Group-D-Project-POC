@@ -71,6 +71,8 @@
 .button-container {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
 }
 
 .booking-button {
@@ -122,6 +124,12 @@
     .booking-button {
         min-width: 0;
     }
+}
+
+.account-avatar {
+    border: 0;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 

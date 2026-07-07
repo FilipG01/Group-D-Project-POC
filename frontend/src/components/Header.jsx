@@ -1,7 +1,11 @@
-import { NavLink, Link } from 'react-router-dom'
+import { useState } from "react";
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { Avatar, Menu } from "@mantine/core";
 import '../styles/header.css'
 
 function Header() {
+    const navigate = useNavigate();
+    
     return (
         <header className="header-main">
             <div className="header-inner">
@@ -19,11 +23,26 @@ function Header() {
                 </nav>
 
                 <div className="button-container">
-                    <Link to="/contact" className="booking-button">Book a Session →</Link>
+                    <Link to="/contact" className="booking-button">Book a Session</Link>
+                    
+                    <Menu position="bottom-end" offset={8} shadow="md" width={120}>
+                        <Menu.Target>
+                            <Avatar component="button" type="button"
+                                radius="xl" color="#DDC4AD" variant="filled" 
+                                className="account-avatar" aria-label="Open account menu"
+                            />
+                        </Menu.Target>
+
+                        <Menu.Dropdown>
+                            <Menu.Item onClick={() => navigate("/login")}>Login</Menu.Item>
+                            <Menu.Item onClick={() => navigate("/register")}>Register</Menu.Item>
+                            <Menu.Item onClick={() => navigate("/dashboard")}>Dashboard</Menu.Item>
+                        </Menu.Dropdown>
+                    </Menu>
                 </div>
             </div>
         </header>
-    )
+    );
 }
 
 export default Header
