@@ -4,8 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import { MantineProvider } from "@mantine/core";
 
+import "@mantine/core/styles.css";  
 import "./styles/global.css";
-import "@mantine/core/styles.css";
 
 import App from "./App.jsx";
 

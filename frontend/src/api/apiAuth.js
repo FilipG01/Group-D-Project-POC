@@ -1,6 +1,6 @@
 import { apiRequest } from "./apiClient";
 
-export function reqisterClient(data){
+export function registerClient(data){
     return apiRequest("/api/auth/register/client",{
         method: "POST",
         body: JSON.stringify(data),
