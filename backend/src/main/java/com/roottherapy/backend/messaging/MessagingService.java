@@ -86,7 +86,10 @@ public class MessagingService {
         Message message = new Message(
                 conversation,
                 currentUser,
-                req.body()
+                req.ciphertext(),
+                req.encryptionAlgorithm(),
+                req.iv(),
+                req.authTag()
         );
         Message savedMessage = messageRepository.save(message);
         return MessageResponse.from(savedMessage);

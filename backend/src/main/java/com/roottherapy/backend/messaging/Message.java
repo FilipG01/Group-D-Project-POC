@@ -29,8 +29,17 @@ public class Message {
     @JoinColumn(name = "sender_user_id", nullable = false)
     private User sender;
 
-    @Column(nullable = false)
-    private String body;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String ciphertext;
+
+    @Column(name = "encryption_algorithm", nullable = false, length = 100)
+    private String encryptionAlgorithm;
+
+    @Column(name = "iv", nullable = false, columnDefinition = "TEXT")
+    private String iv;
+
+    @Column(name = "auth_tag", columnDefinition = "TEXT")
+    private String authTag;
 
     @Column(name = "read_at")
     private Instant readAt;
@@ -38,9 +47,12 @@ public class Message {
     @Column(name = "created_at", insertable = false, updatable = false)
     private Instant createdAt;
 
-    public Message(Conversation conversation, User sender, String body){
+    public Message(Conversation conversation, User sender, String ciphertext, String encryptionAlgorithm, String iv, String authTag) {
         this.conversation = conversation;
         this.sender = sender;
-        this.body = body;
+        this.ciphertext =  ciphertext;
+        this.encryptionAlgorithm = encryptionAlgorithm;
+        this.iv = iv;
+        this.authTag = authTag;
     }
 }

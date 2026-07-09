@@ -11,7 +11,10 @@ public record MessageResponse(
         UUID senderUserId,
         String senderFirstName,
         String senderLastName,
-        String body,
+        String ciphertext,
+        String encryptionAlgorithm,
+        String iv,
+        String authTag,
         Instant readAt,
         Instant createdAt
 
@@ -23,7 +26,10 @@ public record MessageResponse(
                 message.getSender().getId(),
                 message.getSender().getFirstName(),
                 message.getSender().getLastName(),
-                message.getBody(),
+                message.getCiphertext(),
+                message.getEncryptionAlgorithm(),
+                message.getIv(),
+                message.getAuthTag(),
                 message.getReadAt(),
                 message.getCreatedAt()
         );
