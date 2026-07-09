@@ -62,4 +62,4 @@ CREATE INDEX idx_messages_created_at ON messages(created_at);
 -- updated_at trigger
 CREATE TRIGGER trg_conversations_updated_at
     BEFORE UPDATE ON conversations FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at()
+    EXECUTE FUNCTION set_updated_at();
