@@ -251,7 +251,6 @@
         margin: 0 6% 5rem;
         padding: 2rem;
     }
-
     .service-feature,
     .service-feature-reverse {
         grid-template-columns: 1fr;
