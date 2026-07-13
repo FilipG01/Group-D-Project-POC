@@ -1,0 +1,136 @@
+.admin-dashboard-page {
+    min-height: 100vh;
+    padding: 6rem 8%;
+    background: #f5f0e6;
+    color: #2f352f;
+}
+
+.admin-dashboard-header {
+    width: min(100%, 1200px);
+    margin: 0 auto 3.5rem;
+}
+
+.admin-dashboard-header h1 {
+    margin: 0.5rem 0 1rem;
+    color: #4f5d50;
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-weight: 500;
+    line-height: 1.05;
+}
+
+.admin-dashboard-header > p:last-child {
+    max-width: 720px;
+    color: #4d5149;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.admin-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+
+    width: min(100%, 1200px);
+    margin: 0 auto;
+}
+
+.admin-dashboard-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+
+    min-height: 280px;
+    padding: 2rem;
+
+    background: #e3d7c1;
+    border: 1px solid rgba(79, 93, 80, 0.18);
+    border-radius: 1.5rem;
+    box-shadow: 0 16px 38px rgba(47, 53, 47, 0.08);
+
+    transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            background-color 0.25s ease;
+}
+
+.admin-dashboard-card:not(.is-disabled):hover {
+    transform: translateY(-5px);
+    background: #eadfca;
+    box-shadow: 0 22px 48px rgba(47, 53, 47, 0.12);
+}
+
+.admin-dashboard-card-label {
+    margin: 0 0 0.75rem;
+    color: #8a7448;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.admin-dashboard-card h2 {
+    margin: 0 0 1rem;
+    color: #4f5d50;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.admin-dashboard-card p {
+    margin: 0;
+    color: #4d5149;
+    line-height: 1.7;
+}
+
+.admin-dashboard-link,
+.admin-dashboard-disabled-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+    min-height: 46px;
+    padding: 0 1.25rem;
+
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-dashboard-link {
+    background: #4f5d50;
+    color: #fff;
+}
+
+.admin-dashboard-link:hover {
+    background: #687769;
+}
+
+.admin-dashboard-card.is-disabled {
+    opacity: 0.65;
+}
+
+.admin-dashboard-disabled-link {
+    background: rgba(248, 245, 239, 0.8);
+    color: #737970;
+}
+
+@media (max-width: 950px) {
+    .admin-dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .admin-dashboard-page {
+        padding: 4rem 6%;
+    }
+
+    .admin-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-dashboard-card {
+        min-height: auto;
+    }
+}

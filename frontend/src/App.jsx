@@ -20,6 +20,7 @@ import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import AdminServices from "./pages/admin/AdminServices.jsx";
 import AdminServiceCreate from "./pages/admin/AdminServiceCreate.jsx";
 import AdminServiceEdit from "./pages/admin/AdminServiceEdit.jsx";
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 
 import ScrollToTop from "./components/shared/ScrollToTop";
 
@@ -63,12 +64,19 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
-
                 <Route
                     path="/admin/services/:serviceId/edit"
                     element={
                         <ProtectedRoute>
                             <AdminServiceEdit />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin"
+                    element={
+                        <ProtectedRoute>
+                            <AdminDashboard />
                         </ProtectedRoute>
                     }
                 />

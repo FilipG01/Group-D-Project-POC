@@ -136,3 +136,24 @@ export async function uploadServiceImage(file) {
 
     return handleResponse(response);
 }
+
+export async function reorderServices(services) {
+    const response = await fetch(
+        "http://localhost:8080/api/admin/services/reorder",
+        {
+            method: "PATCH",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                services: services.map((service, index) => ({
+                    id: service.id,
+                    displayOrder: index + 1,
+                })),
+            }),
+        }
+    );
+
+    return handleResponse(response);
+}

@@ -154,6 +154,18 @@
     border-radius: 1rem;
 }
 
+.admin-back-link {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    color: #4f5d50;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-back-link:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 750px) {
     .admin-services-page {
         padding: 4rem 6%;

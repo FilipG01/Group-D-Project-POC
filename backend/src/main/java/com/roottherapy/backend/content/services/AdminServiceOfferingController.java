@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import com.roottherapy.backend.content.services.dto.ReorderServicesRequest;
+
 import java.util.List;
 
 @RestController
@@ -71,5 +73,12 @@ public class AdminServiceOfferingController {
                 id,
                 request.archived()
         );
+    }
+
+    @PatchMapping("/reorder")
+    public List<ServiceOfferingResponse> reorderServices(
+            @Valid @RequestBody ReorderServicesRequest request
+    ) {
+        return serviceOfferingService.reorderServices(request);
     }
 }

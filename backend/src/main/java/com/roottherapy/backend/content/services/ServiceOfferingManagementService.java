@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+import com.roottherapy.backend.content.services.dto.ReorderServicesRequest;
 
 import java.util.List;
 import java.util.Locale;
@@ -228,6 +229,22 @@ public class ServiceOfferingManagementService {
         ServiceOffering savedService = repository.save(service);
 
         return ServiceOfferingResponse.fromEntity(savedService);
+    }
+
+    public List<ServiceOfferingResponse> reorderServices(
+            ReorderServicesRequest request
+    ) {
+        for (var orderItem : request.services()) {
+            ServiceOffering service = findById(orderItem.id());
+            service.setDisplayOrder(orderItem.displayOrder());
+            repository.save(service);
+        }
+
+        return repository
+                .findAllByOrderByDisplayOrderAsc()
+                .stream()
+                .map(ServiceOfferingResponse::fromEntity)
+                .toList();
     }
 
     /*
