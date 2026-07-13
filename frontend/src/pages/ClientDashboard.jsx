@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 import { listTherapists } from "../api/apiTherapist";
 import { startConversation } from "../api/apiMessaging";
 
+import ClientSidebar from "../components/dashboard/ClientSidebar"
+
+import "../styles/ClientSidebar.css"
+import "../styles/ClientDashboard.css"
+
 function ClientDashboard() {
     const navigate = useNavigate();
     const { user, logoutUser } = useAuth();
+    const [activeSection, setActiveSection] = useState("Dashboard");
 
     async function handleLogout() {
         await logoutUser();
@@ -43,45 +49,79 @@ function ClientDashboard() {
         }
     }
 
-    return (
-        <main>
-            <h2>Client Dashboard</h2>
+    function renderDashboardSection(){
+        return(
+            <h2>main dashboard</h2>
+        );
+    }
+
+    function renderMessageSection(){
+        return(
+            <>
+            <section>
+            <h3>Therapists</h3>
+
+            {loadingTherapists && <p>Loading therapists...</p>}
+            {therapistErr && <p>{therapistErr}</p>}
+            {conversationMessage && <p>{conversationMessage}</p>}
+
+            {therapists.map((therapist) => (
+            <article key={therapist.userId}>
+                <h4>{therapist.firstName} {therapist.lastName}</h4>
+                <p>{therapist.specialisms}</p>
+                <p>{therapist.bio}</p>
+
+                <button
+                type="button"
+                onClick={() => handleStartConvo(therapist.userId)}
+                >
+                 Start conversation
+               </button>
+            </article>
+            ))}
+            </section>
+            </>
+        );
+    }
+
+    function renderProfileSection(){
+        return(
+            <>
+            <h2>Profile</h2>
             <ul>
                 <li>Email: {user.email}</li>
                 <li>Name: {user.firstName} {user.lastName}</li>
                 <li>Role: {user.role}</li>
                 <li>Status: {user.accountStatus}</li>
             </ul>
+        </>
+        );
+    }
 
-            <button type="button" onClick={handleLogout}>
-                Logout
-            </button>
+    function renderActiveSection(){
+        if(activeSection === "Messages"){
+            return renderMessageSection();
+        }
+        if(activeSection === "Profile"){
+            return renderProfileSection();
+        }
+
+        return renderDashboardSection();
+    }
+
+    return (
         
-        <section>
-    <h3>Therapists</h3>
+        <div className="client-dashboard-layout">
+        <ClientSidebar
+            activeSection={activeSection}
+            onSectionChange={setActiveSection}
+            onLogout={handleLogout}
+            />
 
-    {loadingTherapists && <p>Loading therapists...</p>}
-    {therapistErr && <p>{therapistErr}</p>}
-    {conversationMessage && <p>{conversationMessage}</p>}
-
-    {therapists.map((therapist) => (
-        <article key={therapist.userId}>
-            <h4>{therapist.firstName} {therapist.lastName}</h4>
-            <p>{therapist.specialisms}</p>
-            <p>{therapist.bio}</p>
-
-            <button
-                type="button"
-                onClick={() => handleStartConvo(therapist.userId)}
-            >
-                Start conversation
-            </button>
-        </article>
-    ))}
-</section>
-        
-        
+        <main className="client-dashboard-main">
+            {renderActiveSection()}
         </main>
+        </div>
     );
 }
 

@@ -1,0 +1,9 @@
+.client-dashboard-layout {
+    display: flex;
+    min-height: 90vh;
+}
+
+.client-dashboard-main {
+    flex: 1;
+    padding: 32px;
+}
