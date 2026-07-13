@@ -1,31 +1,47 @@
 import { Link } from "react-router-dom";
 
-function ServiceFeatureSection({ service, index }) {
+function ServicesFeatureSection({ service, index }) {
     const isReversed = index % 2 !== 0;
 
     return (
-        <section className={`service-feature ${isReversed ? "service-feature-reverse" : ""}`}>
+        <article
+            className={`service-feature ${
+                isReversed ? "service-feature-reverse" : ""
+            }`}
+        >
             <div className="service-feature-image">
-                <img src={service.image} alt={service.title} />
+                {service.imageUrl && (
+                    <img
+                        src={service.imageUrl}
+                        alt={service.title}
+                    />
+                )}
             </div>
 
             <div className="service-feature-content">
                 <p className="section-label">{service.category}</p>
+
                 <h2>{service.title}</h2>
+
                 <p>{service.shortDescription}</p>
 
                 <ul>
-                    {service.points.map((point) => (
-                        <li key={point}>{point}</li>
+                    {service.points?.map((point, index) => (
+                        <li key={`${service.id}-point-${index}`}>
+                            {point}
+                        </li>
                     ))}
                 </ul>
 
-                <Link to={service.path} className="services-cta-button">
+                <Link
+                    to={`/services/${service.slug}`}
+                    className="services-cta-button"
+                >
                     Learn More →
                 </Link>
             </div>
-        </section>
+        </article>
     );
 }
 
-export default ServiceFeatureSection;
+export default ServicesFeatureSection;

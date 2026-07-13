@@ -92,6 +92,17 @@
     font-weight: 700;
 }
 
+.service-detail-status {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 4rem 8%;
+    text-align: center;
+}
+
 @media (max-width: 900px) {
     .service-detail-content {
         grid-template-columns: 1fr;

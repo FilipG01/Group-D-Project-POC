@@ -218,6 +218,18 @@
     background: #e3c99a;
 }
 
+.services-status-message {
+    width: 100%;
+    padding: 4rem 1rem;
+    text-align: center;
+    color: #4f5d50;
+    font-size: 1.1rem;
+}
+
+.services-error-message {
+    color: #8b3a3a;
+}
+
 /* Tablet Layout */
 @media (max-width: 1000px) {
     .service-card {

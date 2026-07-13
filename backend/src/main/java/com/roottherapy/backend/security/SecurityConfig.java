@@ -41,7 +41,27 @@ public class SecurityConfig {
         return http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/register/client", "/api/auth/login").permitAll()
+
+                        // Public authentication endpoints
+                        .requestMatchers(
+                                "/api/auth/register/client",
+                                "/api/auth/login"
+                        ).permitAll()
+
+                        // Public services content
+                        .requestMatchers(
+                                org.springframework.http.HttpMethod.GET,
+                                "/api/services",
+                                "/api/services/**"
+                        ).permitAll()
+
+                        // Admin-only service management
+                        .requestMatchers(
+                                "/api/admin/services",
+                                "/api/admin/services/**"
+                        ).hasRole("ADMIN")
+
+                        // Everything else requires login
                         .anyRequest().authenticated()
                 ).build();
     }
@@ -52,7 +72,7 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of("http://localhost:5173"));
         config.setAllowCredentials(true);
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
