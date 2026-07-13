@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getImageUrl } from "../utils/imageUrl.js";
 
 import { getServiceBySlug } from "../api/servicesApi.js";
 import ContactCTA from "../components/shared/ContactCTA.jsx";
@@ -60,6 +61,8 @@ function ServiceDetail() {
         ? service.imageUrl
         : `${SITE_URL}${service.imageUrl || ""}`;
 
+    const displayImageUrl = getImageUrl(service.imageUrl);
+
     return (
         <>
             <SEO
@@ -78,8 +81,8 @@ function ServiceDetail() {
                 <section
                     className="service-detail-hero"
                     style={{
-                        backgroundImage: service.imageUrl
-                            ? `url(${service.imageUrl})`
+                        backgroundImage: displayImageUrl
+                            ? `url(${displayImageUrl})`
                             : "none",
                     }}
                 >

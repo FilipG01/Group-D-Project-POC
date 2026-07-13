@@ -1,0 +1,171 @@
+.admin-services-page {
+    min-height: 100vh;
+    padding: 6rem 8%;
+    background: #f5f0e6;
+    color: #2f352f;
+}
+
+.admin-services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.admin-services-header h1 {
+    margin: 0.5rem 0 1rem;
+    color: #4f5d50;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+}
+
+.admin-services-header p {
+    max-width: 720px;
+    line-height: 1.7;
+}
+
+.admin-services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-service-card {
+    padding: 1.75rem;
+    background: #e3d7c1;
+    border: 1px solid rgba(79, 93, 80, 0.18);
+    border-radius: 1.25rem;
+    box-shadow: 0 12px 30px rgba(47, 53, 47, 0.08);
+}
+
+.admin-service-card.is-archived {
+    opacity: 0.68;
+}
+
+.admin-service-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.admin-service-summary h2 {
+    margin: 0.35rem 0 0.75rem;
+    color: #4f5d50;
+}
+
+.admin-service-summary p {
+    margin: 0;
+    line-height: 1.65;
+}
+
+.admin-service-order {
+    color: #776d59;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.admin-service-statuses {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-end;
+    gap: 0.6rem;
+}
+
+.status-badge {
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.status-badge.is-published {
+    background: #dce8d8;
+    color: #36533a;
+}
+
+.status-badge.is-draft {
+    background: #eee3c9;
+    color: #6a582f;
+}
+
+.status-badge.is-archived {
+    background: #ead2d2;
+    color: #733d3d;
+}
+
+.admin-service-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(79, 93, 80, 0.18);
+}
+
+.admin-primary-button,
+.admin-secondary-button,
+.admin-danger-button {
+    min-height: 44px;
+    padding: 0 1.15rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+.admin-primary-button {
+    background: #4f5d50;
+    color: #fff;
+}
+
+.admin-secondary-button {
+    background: #f8f5ef;
+    color: #4f5d50;
+}
+
+.admin-danger-button {
+    background: #8a4c4c;
+    color: #fff;
+}
+
+.admin-primary-button:disabled,
+.admin-secondary-button:disabled,
+.admin-danger-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.admin-services-message {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.admin-services-error {
+    background: #f3dede;
+    color: #7a3333;
+    border-radius: 1rem;
+}
+
+@media (max-width: 750px) {
+    .admin-services-page {
+        padding: 4rem 6%;
+    }
+
+    .admin-services-header,
+    .admin-service-summary {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-service-statuses {
+        justify-content: flex-start;
+    }
+}

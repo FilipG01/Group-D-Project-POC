@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getImageUrl } from "../../utils/imageUrl.js";
 
 function ServicesFeatureSection({ service, index }) {
     const isReversed = index % 2 !== 0;
@@ -12,7 +13,7 @@ function ServicesFeatureSection({ service, index }) {
             <div className="service-feature-image">
                 {service.imageUrl && (
                     <img
-                        src={service.imageUrl}
+                        src={getImageUrl(service.imageUrl)}
                         alt={service.title}
                     />
                 )}

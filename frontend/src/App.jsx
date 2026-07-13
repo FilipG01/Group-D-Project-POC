@@ -17,6 +17,10 @@ import Register from "./pages/Register.jsx";
 import ClientDashboard from "./pages/ClientDashboard.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 
+import AdminServices from "./pages/admin/AdminServices.jsx";
+import AdminServiceCreate from "./pages/admin/AdminServiceCreate.jsx";
+import AdminServiceEdit from "./pages/admin/AdminServiceEdit.jsx";
+
 import ScrollToTop from "./components/shared/ScrollToTop";
 
 import FloatingCallButton from "./components/shared/FloatingCallButton";
@@ -43,7 +47,33 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+                <Route
+                    path="/admin/services"
+                    element={
+                        <ProtectedRoute>
+                            <AdminServices />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/services/new"
+                    element={
+                        <ProtectedRoute>
+                            <AdminServiceCreate />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/admin/services/:serviceId/edit"
+                    element={
+                        <ProtectedRoute>
+                            <AdminServiceEdit />
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
+
 
             <FloatingCallButton />
 

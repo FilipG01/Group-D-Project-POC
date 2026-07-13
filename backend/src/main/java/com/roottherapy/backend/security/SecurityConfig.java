@@ -52,13 +52,16 @@ public class SecurityConfig {
                         .requestMatchers(
                                 org.springframework.http.HttpMethod.GET,
                                 "/api/services",
-                                "/api/services/**"
+                                "/api/services/**",
+                                "/uploads/**"
                         ).permitAll()
 
                         // Admin-only service management
                         .requestMatchers(
                                 "/api/admin/services",
-                                "/api/admin/services/**"
+                                "/api/admin/services/**",
+                                "/api/admin/uploads",
+                                "/api/admin/uploads/**"
                         ).hasRole("ADMIN")
 
                         // Everything else requires login
