@@ -21,6 +21,12 @@ import AdminServices from "./pages/admin/AdminServices.jsx";
 import AdminServiceCreate from "./pages/admin/AdminServiceCreate.jsx";
 import AdminServiceEdit from "./pages/admin/AdminServiceEdit.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import AdminTherapists from "./pages/admin/AdminTherapists.jsx";
+import AdminCreateTherapist from "./pages/admin/AdminCreateTherapist.jsx";
+import AdminEditTherapist from "./pages/admin/AdminEditTherapist.jsx";
+
+import TherapistDashboard from "./pages/therapist/TherapistDashboard.jsx";
+import TherapistProfileEdit from "./pages/therapist/TherapistProfileEdit.jsx";
 
 import ScrollToTop from "./components/shared/ScrollToTop";
 
@@ -43,7 +49,7 @@ function App() {
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/dashboard" element={
-                        <ProtectedRoute>
+                        <ProtectedRoute allowedRoles={["CLIENT"]}>
                             <ClientDashboard />
                         </ProtectedRoute>
                     }
@@ -51,7 +57,7 @@ function App() {
                 <Route
                     path="/admin/services"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
                             <AdminServices />
                         </ProtectedRoute>
                     }
@@ -59,7 +65,7 @@ function App() {
                 <Route
                     path="/admin/services/new"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
                             <AdminServiceCreate />
                         </ProtectedRoute>
                     }
@@ -67,7 +73,7 @@ function App() {
                 <Route
                     path="/admin/services/:serviceId/edit"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
                             <AdminServiceEdit />
                         </ProtectedRoute>
                     }
@@ -75,8 +81,49 @@ function App() {
                 <Route
                     path="/admin"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
                             <AdminDashboard />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/therapists"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminTherapists />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/therapists/new"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminCreateTherapist />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/therapists/:userId/edit"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminEditTherapist />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/therapist"
+                    element={
+                        <ProtectedRoute allowedRoles={["THERAPIST"]}>
+                            <TherapistDashboard />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/therapist/profile"
+                    element={
+                        <ProtectedRoute allowedRoles={["THERAPIST"]}>
+                            <TherapistProfileEdit />
                         </ProtectedRoute>
                     }
                 />

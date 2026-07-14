@@ -39,23 +39,26 @@ function AdminDashboard() {
                     </Link>
                 </article>
 
-                <article className="admin-dashboard-card is-disabled">
+                <article className="admin-dashboard-card">
                     <div>
                         <p className="admin-dashboard-card-label">
-                            Coming next
+                            Public content
                         </p>
 
                         <h2>Therapists</h2>
 
                         <p>
-                            Manage therapist profiles displayed on the About
-                            page.
+                            Create therapist accounts and manage the profiles
+                            displayed on the About page.
                         </p>
                     </div>
 
-                    <span className="admin-dashboard-disabled-link">
-                        Coming soon
-                    </span>
+                    <Link
+                        to="/admin/therapists"
+                        className="admin-dashboard-link"
+                    >
+                        Manage Therapists →
+                    </Link>
                 </article>
 
                 <article className="admin-dashboard-card is-disabled">

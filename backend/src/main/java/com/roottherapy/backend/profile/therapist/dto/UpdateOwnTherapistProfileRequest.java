@@ -5,12 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public record TherapistProfileRequest(
+import java.util.List;
 
-        @NotBlank
+public record UpdateOwnTherapistProfileRequest(
+
+        @NotBlank(message = "Qualifications are required")
         String qualifications,
 
-        @NotBlank
+        @NotBlank(message = "Registration number is required")
         @Size(max = 100)
         String registrationNumber,
 
@@ -18,10 +20,20 @@ public record TherapistProfileRequest(
         @Min(0)
         Integer yearsExperience,
 
-        @Size(max = 2000)
         String bio,
 
         @NotNull
-        Boolean acceptingClients
+        Boolean acceptingClients,
+
+        String profileImageUrl,
+
+        @NotNull
+        List<String> publicBio,
+
+        @NotNull
+        List<String> languages,
+
+        @NotNull
+        List<String> specialisms
 ) {
 }
