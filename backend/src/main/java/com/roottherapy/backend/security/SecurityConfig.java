@@ -48,23 +48,35 @@ public class SecurityConfig {
                                 "/api/auth/login"
                         ).permitAll()
 
-                        // Public services content
+                        // Public website content
                         .requestMatchers(
                                 org.springframework.http.HttpMethod.GET,
                                 "/api/services",
                                 "/api/services/**",
+                                "/api/therapists/public",
+                                "/api/therapists/public/**",
                                 "/uploads/**"
                         ).permitAll()
 
-                        // Admin-only service management
+                        // Therapist self-management
+                        .requestMatchers(
+                                "/api/therapist-profile",
+                                "/api/therapist-profile/**",
+                                "/api/therapist/uploads",
+                                "/api/therapist/uploads/**"
+                        ).hasRole("THERAPIST")
+
+                        // Admin content management
                         .requestMatchers(
                                 "/api/admin/services",
                                 "/api/admin/services/**",
                                 "/api/admin/uploads",
-                                "/api/admin/uploads/**"
+                                "/api/admin/uploads/**",
+                                "/api/admin/therapists",
+                                "/api/admin/therapists/**"
                         ).hasRole("ADMIN")
 
-                        // Everything else requires login
+                        // Everything else requires authentication
                         .anyRequest().authenticated()
                 ).build();
     }

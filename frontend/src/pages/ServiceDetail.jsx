@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { getImageUrl } from "../utils/imageUrl.js";
 
 import { getServiceBySlug } from "../api/servicesApi.js";
@@ -44,15 +44,7 @@ function ServiceDetail() {
     }
 
     if (error || !service) {
-        return (
-            <main className="service-detail-page service-detail-status">
-                <h1>Service not found</h1>
-
-                <Link to="/services">
-                    Back to Services
-                </Link>
-            </main>
-        );
+        return <Navigate to="/404" replace />;
     }
 
     const canonicalUrl = `${SITE_URL}/services/${service.slug}`;

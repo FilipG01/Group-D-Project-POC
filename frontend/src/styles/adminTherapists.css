@@ -1,0 +1,157 @@
+.admin-therapists-page {
+    min-height: 100vh;
+    padding: 6rem 8%;
+    background: #f5f0e6;
+    color: #2f352f;
+}
+
+.admin-therapists-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+
+    width: min(100%, 1200px);
+    margin: 0 auto 3rem;
+}
+
+.admin-therapists-header h1 {
+    margin: 0.5rem 0 1rem;
+    color: #4f5d50;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+}
+
+.admin-therapists-header p {
+    max-width: 720px;
+    line-height: 1.7;
+}
+
+.admin-therapists-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    width: min(100%, 1200px);
+    margin: 0 auto;
+}
+
+.admin-therapist-card {
+    display: grid;
+    grid-template-columns: 130px 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+    background: #e3d7c1;
+    border: 1px solid rgba(79, 93, 80, 0.18);
+    border-radius: 1.25rem;
+    box-shadow: 0 12px 30px rgba(47, 53, 47, 0.08);
+}
+
+.admin-therapist-image img,
+.admin-therapist-placeholder {
+    width: 130px;
+    height: 130px;
+    border-radius: 1rem;
+}
+
+.admin-therapist-image img {
+    display: block;
+    object-fit: cover;
+}
+
+.admin-therapist-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f8f5ef;
+    color: #777;
+    text-align: center;
+}
+
+.admin-therapist-info h2 {
+    margin: 0.25rem 0 0.6rem;
+    color: #4f5d50;
+}
+
+.admin-therapist-info p {
+    margin: 0.3rem 0;
+    line-height: 1.5;
+}
+
+.admin-therapist-order {
+    color: #776d59;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.admin-therapist-statuses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.admin-therapist-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.admin-therapists-message {
+    width: min(100%, 1200px);
+    margin: 2rem auto;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.admin-therapists-error {
+    background: #f3dede;
+    color: #7a3333;
+    border-radius: 1rem;
+}
+
+@media (max-width: 850px) {
+    .admin-therapists-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-therapist-card {
+        grid-template-columns: 100px 1fr;
+    }
+
+    .admin-therapist-image img,
+    .admin-therapist-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+
+    .admin-therapist-actions {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-therapists-page {
+        padding: 4rem 6%;
+    }
+
+    .admin-therapist-card {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-therapist-image img,
+    .admin-therapist-placeholder {
+        width: 140px;
+        height: 140px;
+    }
+
+    .admin-therapist-actions {
+        grid-column: auto;
+    }
+}
