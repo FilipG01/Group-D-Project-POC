@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface ConversationRepository extends JpaRepository<Conversation, UUID> {
     Optional<Conversation> findByClientIdAndTherapistId(UUID clientId, UUID therapistId);
     List<Conversation> findByClientIdOrTherapistId(UUID clientId, UUID therapistId);
+    Optional<Conversation> findFirstByClientIdAndStatus(UUID clientId, ConversationStatus status);
 }
