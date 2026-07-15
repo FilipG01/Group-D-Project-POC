@@ -1,7 +1,7 @@
 function ClientSidebar({ activeSection, onSectionChange, onLogout }){
     const navItems = [
         "Dashboard",
-        "Messages",
+        "Chat",
         "Profile"
     ];
 
