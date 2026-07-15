@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../auth/useAuth.js";
 import { useEffect, useState } from "react";
 import { listTherapists } from "../api/apiTherapist";
 import { startConversation } from "../api/apiMessaging";

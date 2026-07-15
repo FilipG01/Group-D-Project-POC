@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../auth/useAuth.js";
 import "../styles/authForm.css";
 
 function LoginForm(){
@@ -18,16 +18,25 @@ function LoginForm(){
         setFormData((current) => ({ ...current, [name]: value}));
     }
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault();
         setError("");
         setSubmitting(true);
-        try{
-            await loginUser(formData);
-            navigate("/dashboard");
-        }catch(err){
+
+        try {
+            const loggedInUser = await loginUser(formData);
+
+            if (loggedInUser.role === "ADMIN") {
+                navigate("/admin");
+            } else if (loggedInUser.role === "THERAPIST") {
+                navigate("/therapist");
+            } else {
+                navigate("/dashboard");
+            }
+
+        } catch (err) {
             setError(err.message || "Error Trying to Login!");
-        } finally{
+        } finally {
             setSubmitting(false);
         }
     }
