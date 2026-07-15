@@ -28,6 +28,8 @@ import AdminEditTherapist from "./pages/admin/AdminEditTherapist.jsx";
 import TherapistDashboard from "./pages/therapist/TherapistDashboard.jsx";
 import TherapistProfileEdit from "./pages/therapist/TherapistProfileEdit.jsx";
 
+import NotFound from "./pages/errors/NotFound.jsx";
+
 import ScrollToTop from "./components/shared/ScrollToTop";
 
 import FloatingCallButton from "./components/shared/FloatingCallButton";
@@ -48,6 +50,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="*" element={<NotFound />} />
                 <Route path="/dashboard" element={
                         <ProtectedRoute allowedRoles={["CLIENT"]}>
                             <ClientDashboard />
