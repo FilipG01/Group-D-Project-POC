@@ -27,6 +27,7 @@ import AdminEditTherapist from "./pages/admin/AdminEditTherapist.jsx";
 
 import TherapistDashboard from "./pages/therapist/TherapistDashboard.jsx";
 import TherapistProfileEdit from "./pages/therapist/TherapistProfileEdit.jsx";
+import TherapistChat from "./pages/therapist/TherapistChat.jsx";
 
 import NotFound from "./pages/errors/NotFound.jsx";
 
@@ -127,6 +128,14 @@ function App() {
                     element={
                         <ProtectedRoute allowedRoles={["THERAPIST"]}>
                             <TherapistProfileEdit />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/therapist/chat"
+                    element={
+                        <ProtectedRoute allowedRoles={["THERAPIST"]}>
+                            <TherapistChat />
                         </ProtectedRoute>
                     }
                 />
