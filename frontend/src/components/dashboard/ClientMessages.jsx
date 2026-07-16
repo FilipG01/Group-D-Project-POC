@@ -49,10 +49,14 @@ function ClientMessages({ conversation }) {
         }
     }
 
+    const chatPartnerName = user?.id === conversation.therapistUserId
+        ? `${conversation.clientFirstName} ${conversation.clientLastName}`
+        : `${conversation.therapistFirstName} ${conversation.therapistLastName}`;
+
     return (
         <section className="client-messages">
             <header className="client-messages-header">
-                    <h2>{conversation.therapistFirstName} {conversation.therapistLastName}</h2>
+                    <h2>{chatPartnerName}</h2>
             </header>
 
             {loading && <p>Loading messages...</p>}
