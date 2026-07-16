@@ -7,9 +7,11 @@ import { startConversation, listConversations } from "../api/apiMessaging";
 import ClientSidebar from "../components/dashboard/ClientSidebar"
 import ClientMessages from "../components/dashboard/ClientMessages";
 import TherapistDirectory from "../components/dashboard/TherapistDirectory";
+import ClientProfileForm from "../components/dashboard/ClientProfileForm";
 
 import "../styles/ClientSidebar.css"
 import "../styles/ClientDashboard.css"
+import "../styles/adminTherapistForm.css";
 
 function ClientDashboard() {
     const navigate = useNavigate();
@@ -99,17 +101,7 @@ function ClientDashboard() {
     }
 
     function renderProfileSection(){
-        return(
-            <>
-            <h2>Profile</h2>
-            <ul>
-                <li>Email: {user.email}</li>
-                <li>Name: {user.firstName} {user.lastName}</li>
-                <li>Role: {user.role}</li>
-                <li>Status: {user.accountStatus}</li>
-            </ul>
-        </>
-        );
+        return <ClientProfileForm />;
     }
 
     function renderActiveSection(){

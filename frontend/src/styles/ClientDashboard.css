@@ -10,6 +10,54 @@
     min-width: 0;
 }
 
+.client-profile-section {
+    width: min(100%, 1050px);
+    margin: 0 auto;
+}
+
+.client-profile-section .admin-therapist-form select {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(79, 93, 80, 0.25);
+    border-radius: 0.75rem;
+    background: #fffdf8;
+    color: #2f352f;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.client-profile-section .admin-therapist-form input:disabled {
+    color: #62685f;
+    background: rgba(248, 245, 239, 0.72);
+}
+
+.client-profile-section .admin-primary-button {
+    width: fit-content;
+    min-height: 46px;
+    padding: 0 1.35rem;
+    border: 0;
+    border-radius: 999px;
+    background: #4f5d50;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+.client-profile-section .admin-primary-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.client-profile-success {
+    width: min(100%, 1050px);
+    margin: 0 auto 1.5rem;
+    padding: 1rem 1.25rem;
+    background: #dce8d8;
+    color: #36533a;
+    border-radius: 1rem;
+}
+
 .client-messages {
     width: min(100%, 980px);
     min-height: calc(90vh - 64px);
