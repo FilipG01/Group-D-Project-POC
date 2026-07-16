@@ -33,6 +33,7 @@ import AdminBlogReorder from "./pages/admin/AdminBlogReorder.jsx";
 
 import TherapistDashboard from "./pages/therapist/TherapistDashboard.jsx";
 import TherapistProfileEdit from "./pages/therapist/TherapistProfileEdit.jsx";
+import TherapistChat from "./pages/therapist/TherapistChat.jsx";
 import TherapistBlogPosts from "./pages/therapist/TherapistBlogPosts.jsx";
 import TherapistBlogEditor from "./pages/therapist/TherapistBlogEditor.jsx";
 
@@ -183,6 +184,13 @@ function App() {
                     }
                 />
                 <Route
+                    path="/therapist/chat"
+                    element={
+                        <ProtectedRoute allowedRoles={["THERAPIST"]}>
+                            <TherapistChat />
+                        </ProtectedRoute>
+                    }
+                />
                     path="/therapist/blog"
                     element={
                         <ProtectedRoute allowedRoles={["THERAPIST"]}>

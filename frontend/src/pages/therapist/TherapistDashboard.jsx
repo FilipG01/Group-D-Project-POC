@@ -57,6 +57,28 @@ function TherapistDashboard() {
                         Manage My Posts →
                     </Link>
                 </article>
+
+                <article className="therapist-dashboard-card">
+                    <div>
+                        <p className="therapist-dashboard-card-label">
+                            Client chat
+                        </p>
+
+                        <h2>Messages</h2>
+
+                        <p>
+                            View active client conversations and reply from
+                            your therapist chat workspace.
+                        </p>
+                    </div>
+
+                    <Link
+                        to="/therapist/chat"
+                        className="therapist-dashboard-link"
+                    >
+                        Open Chat
+                    </Link>
+                </article>
             </section>
         </main>
     );

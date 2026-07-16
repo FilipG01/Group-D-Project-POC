@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -58,8 +59,27 @@ public class MessagingService {
         if(therapistProfileRepository.findByUserIdAndAcceptingClientsTrue(therapist.getId()).isEmpty()){
             throw new IllegalArgumentException("this therapist is not accepting clients at the moment!");
         }
-        Conversation conversation = conversationRepository.findByClientIdAndTherapistId(currentUser.getId(), therapist.getId())
-                .orElseGet(() -> conversationRepository.save(new Conversation(currentUser, therapist)));
+
+        Optional<Conversation> existingActiveConversation =
+                conversationRepository.findFirstByClientIdAndStatus(
+                        currentUser.getId(),
+                        ConversationStatus.ACTIVE
+                );
+
+        if (existingActiveConversation.isPresent()) {
+            Conversation existingConversation = existingActiveConversation.get();
+
+            if (!existingConversation.getTherapist().getId().equals(therapist.getId())) {
+                throw new IllegalArgumentException("you already have an active conversation with a therapist");
+            }
+
+            return ConversationResponse.from(existingConversation);
+        }
+
+        Conversation conversation = conversationRepository.save(
+                new Conversation(currentUser, therapist)
+        );
+
         return ConversationResponse.from(conversation);
     }
 
