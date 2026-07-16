@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { createAdminTherapist } from "../../api/therapistsApi.js";
-import TherapistForm from "../../components/admin/TherapistForm.jsx";
+import TherapistForm from "../../components/therapists/TherapistForm.jsx";
 
 import "../../styles/adminTherapistForm.css";
 

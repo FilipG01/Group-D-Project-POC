@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createService } from "../../api/servicesApi.js";
-import ServiceForm from "../../components/admin/ServiceForm.jsx";
-import "../../styles/adminServiceForm.css";
+import ServiceForm from "../../components/services/admin/ServiceForm.jsx";
+import "../../styles/services/adminServiceForm.css";
 
 function AdminServiceCreate() {
     const navigate = useNavigate();

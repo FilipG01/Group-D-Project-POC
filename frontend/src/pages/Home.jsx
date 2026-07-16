@@ -1,4 +1,4 @@
-import "../styles/home.css";
+import "../styles/home/home.css";
 import SEO from "../components/shared/SEO.jsx";
 import { businessSchema } from "../data/businessSchema.js";
 

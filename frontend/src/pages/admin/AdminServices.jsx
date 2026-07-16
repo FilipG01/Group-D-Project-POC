@@ -1,167 +1,22 @@
 import { Link } from "react-router-dom";
 
-import { useEffect, useState } from "react";
-import {
-    getAdminServices,
-    setServicePublished,
-    setServiceArchived,
-    reorderServices,
-} from "../../api/servicesApi.js";
-import "../../styles/adminServices.css";
+import useAdminServices from "../../hooks/services/useAdminServices.js";
+
+import "../../styles/services/adminServices.css";
 
 
 function AdminServices() {
-    const [services, setServices] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState("");
-    const [busyServiceId, setBusyServiceId] = useState(null);
 
-    async function loadServices({ showLoading = true } = {}) {
-        if (showLoading) {
-            setIsLoading(true);
-        }
-
-        setError("");
-
-        try {
-            const data = await getAdminServices();
-            setServices(data);
-        } catch (requestError) {
-            console.error(requestError);
-            setError(
-                "The services could not be loaded. Make sure you are logged in as an admin."
-            );
-        } finally {
-            if (showLoading) {
-                setIsLoading(false);
-            }
-        }
-    }
-
-    useEffect(() => {
-        let isCancelled = false;
-
-        async function loadInitialServices() {
-            try {
-                const data = await getAdminServices();
-
-                if (!isCancelled) {
-                    setServices(data);
-                }
-            } catch (requestError) {
-                console.error(requestError);
-
-                if (!isCancelled) {
-                    setError(
-                        "The services could not be loaded. Make sure you are logged in as an admin."
-                    );
-                }
-            } finally {
-                if (!isCancelled) {
-                    setIsLoading(false);
-                }
-            }
-        }
-
-        loadInitialServices();
-
-        return () => {
-            isCancelled = true;
-        };
-    }, []);
-
-    async function handlePublishToggle(service) {
-        setBusyServiceId(service.id);
-        setError("");
-
-        try {
-            const updatedService = await setServicePublished(
-                service.id,
-                !service.published
-            );
-
-            setServices((currentServices) =>
-                currentServices.map((currentService) =>
-                    currentService.id === updatedService.id
-                        ? updatedService
-                        : currentService
-                )
-            );
-        } catch (requestError) {
-            console.error(requestError);
-            setError(requestError.message);
-        } finally {
-            setBusyServiceId(null);
-        }
-    }
-
-    async function handleArchiveToggle(service) {
-        const action = service.archived ? "restore" : "archive";
-
-        const confirmed = window.confirm(
-            `Are you sure you want to ${action} "${service.title}"?`
-        );
-
-        if (!confirmed) {
-            return;
-        }
-
-        setBusyServiceId(service.id);
-        setError("");
-
-        try {
-            const updatedService = await setServiceArchived(
-                service.id,
-                !service.archived
-            );
-
-            setServices((currentServices) =>
-                currentServices.map((currentService) =>
-                    currentService.id === updatedService.id
-                        ? updatedService
-                        : currentService
-                )
-            );
-        } catch (requestError) {
-            console.error(requestError);
-            setError(requestError.message);
-        } finally {
-            setBusyServiceId(null);
-        }
-    }
-
-    async function handleMove(serviceIndex, direction) {
-        const targetIndex =
-            direction === "up"
-                ? serviceIndex - 1
-                : serviceIndex + 1;
-
-        if (targetIndex < 0 || targetIndex >= services.length) {
-            return;
-        }
-
-        const reordered = [...services];
-
-        [reordered[serviceIndex], reordered[targetIndex]] = [
-            reordered[targetIndex],
-            reordered[serviceIndex],
-        ];
-
-        setBusyServiceId(services[serviceIndex].id);
-        setError("");
-
-        try {
-            const updatedServices = await reorderServices(reordered);
-            setServices(updatedServices);
-        } catch (requestError) {
-            console.error(requestError);
-            setError(requestError.message);
-
-            await loadServices({ showLoading: false });
-        } finally {
-            setBusyServiceId(null);
-        }
-    }
+    const {
+        services,
+        isLoading,
+        error,
+        busyServiceId,
+        loadServices,
+        togglePublished,
+        toggleArchived,
+        moveService,
+    } = useAdminServices();
 
     if (isLoading) {
         return (
@@ -198,9 +53,16 @@ function AdminServices() {
             </div>
 
             {error && (
-                <p className="admin-services-message admin-services-error">
-                    {error}
-                </p>
+                <div className="admin-services-message admin-services-error">
+                    <p>{error}</p>
+
+                    <button
+                        type="button"
+                        onClick={() => loadServices()}
+                    >
+                        Try again
+                    </button>
+                </div>
             )}
 
             {services.length === 0 ? (
@@ -265,7 +127,7 @@ function AdminServices() {
                                         type="button"
                                         className="admin-secondary-button"
                                         onClick={() =>
-                                            handlePublishToggle(service)
+                                            togglePublished(service)
                                         }
                                         disabled={
                                             isBusy || service.archived
@@ -280,7 +142,7 @@ function AdminServices() {
                                         type="button"
                                         className="admin-danger-button"
                                         onClick={() =>
-                                            handleArchiveToggle(service)
+                                            toggleArchived(service)
                                         }
                                         disabled={isBusy}
                                     >
@@ -292,7 +154,9 @@ function AdminServices() {
                                     <button
                                         type="button"
                                         className="admin-secondary-button"
-                                        onClick={() => handleMove(index, "up")}
+                                        onClick={() =>
+                                            moveService(index, "up")
+                                        }
                                         disabled={isBusy || index === 0}
                                     >
                                         Move Up
@@ -301,7 +165,9 @@ function AdminServices() {
                                     <button
                                         type="button"
                                         className="admin-secondary-button"
-                                        onClick={() => handleMove(index, "down")}
+                                        onClick={() =>
+                                            moveService(index, "down")
+                                        }
                                         disabled={
                                             isBusy ||
                                             index === services.length - 1

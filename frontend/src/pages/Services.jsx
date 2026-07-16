@@ -1,11 +1,11 @@
+import ContactCTA from "../components/shared/ContactCTA.jsx";
 import SEO from "../components/shared/SEO.jsx";
+import ServicesHero from "../components/services/ServicesHero.jsx";
+import ServicesIntro from "../components/services/ServicesIntro.jsx";
+import ServicesList from "../components/services/ServicesList.jsx";
 import { pageMeta } from "../data/pageMetaData.js";
 
-import ServicesHero from "../components/services/ServicesHero.jsx"
-import ServicesIntro from "../components/services/ServicesIntro.jsx"
-import ContactCTA from "../components/shared/ContactCTA.jsx"
-import ServicesList from "../components/services/ServicesList";
-import "../styles/services.css";
+import "../styles/services/services.css";
 
 function Services() {
     return (
@@ -19,7 +19,7 @@ function Services() {
                 <ContactCTA />
             </main>
         </>
-    )
+    );
 }
 
-export default Services
+export default Services;

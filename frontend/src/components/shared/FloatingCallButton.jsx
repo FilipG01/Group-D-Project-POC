@@ -1,5 +1,5 @@
 import { FaPhoneAlt } from "react-icons/fa";
-import "../../styles/floatingCallButton.css";
+import "../../styles/shared/floatingCallButton.css";
 
 function FloatingCallButton() {
     return (

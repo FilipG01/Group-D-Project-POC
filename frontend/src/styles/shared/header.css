@@ -1,0 +1,135 @@
+.header-main {
+    width: 100%;
+    height: 72px;
+    background-color: #5A645B;
+}
+
+.header-inner {
+    width: 100%;
+    height: 100%;
+    padding: 0 18px 0 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 44px;
+    box-sizing: border-box;
+}
+
+.logo-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: #E0DEC5;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo {
+    width: 46px;
+    height: 58px;
+    flex: 0 0 auto;
+    background-color: #E0DEC5;
+    mask: url('../../assets/file.svg') center / contain no-repeat;
+    -webkit-mask: url('../../assets/file.svg') center / contain no-repeat;
+}
+
+.header-title {
+    margin: 0;
+    color: #E0DEC5;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 58px;
+}
+
+.header-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 14px;
+    color: #FFFFFF;
+    font-size: 24px;
+    line-height: 1;
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* .header-nav a.active {
+    background-color: #E0DEC5;
+    color: #1F1F1F;
+} */
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.booking-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 218px;
+    height: 50px;
+    padding: 0 30px;
+    border-radius: 999px;
+    background-color: #DDC4AD;
+    color: #5A645B;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.booking-button:hover,
+.header-nav a:hover {
+    background-color: #DDBE7D;
+    color: #1F1F1F;
+}
+
+@media (max-width: 980px) {
+    .header-main {
+        height: auto;
+    }
+
+    .header-inner {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 16px;
+        padding: 18px 20px;
+    }
+
+    .header-nav {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .header-title {
+        font-size: 34px;
+    }
+
+    .booking-button {
+        min-width: 0;
+    }
+}
+
+.account-avatar {
+    border: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+

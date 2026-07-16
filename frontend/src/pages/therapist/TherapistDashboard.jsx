@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../../styles/therapistDashboard.css";
+import "../../styles/therapists/therapistDashboard.css";
 
 function TherapistDashboard() {
     return (
@@ -36,22 +36,26 @@ function TherapistDashboard() {
                     </Link>
                 </article>
 
-                <article className="therapist-dashboard-card is-disabled">
+                <article className="therapist-dashboard-card">
                     <div>
                         <p className="therapist-dashboard-card-label">
-                            Planned feature
+                            Content
                         </p>
 
-                        <h2>Blog Posts</h2>
+                        <h2>My Blog Posts</h2>
 
                         <p>
-                            Write and submit articles for admin review.
+                            Write articles, manage your drafts and
+                            submit completed posts for admin review.
                         </p>
                     </div>
 
-                    <span className="therapist-dashboard-disabled-link">
-                        Coming soon
-                    </span>
+                    <Link
+                        to="/therapist/blog"
+                        className="therapist-dashboard-link"
+                    >
+                        Manage My Posts →
+                    </Link>
                 </article>
 
                 <article className="therapist-dashboard-card">

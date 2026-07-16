@@ -1,106 +1,145 @@
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { locationGallery } from "../../data/locationGalleryData";
-import "../../styles/locationGallery.css";
+import {
+    FaChevronLeft,
+    FaChevronRight,
+} from "react-icons/fa";
+
+import {
+    locationGallery,
+} from "../../data/locationGalleryData.js";
+
+import "../../styles/about/locationGallery.css";
 
 function LocationGallery() {
+    const [currentImage, setCurrentImage] =
+        useState(0);
 
-    const [currentImage, setCurrentImage] = useState(0);
+    const currentGalleryImage =
+        locationGallery[currentImage];
 
     function previousImage() {
-        setCurrentImage((prev) =>
-            prev === 0 ? locationGallery.length - 1 : prev - 1
+        setCurrentImage((current) =>
+            current === 0
+                ? locationGallery.length - 1
+                : current - 1
         );
     }
 
     function nextImage() {
-        setCurrentImage((prev) =>
-            prev === locationGallery.length - 1 ? 0 : prev + 1
+        setCurrentImage((current) =>
+            current ===
+            locationGallery.length - 1
+                ? 0
+                : current + 1
         );
     }
 
     return (
-
         <section className="location-gallery">
-
             <div className="gallery-heading">
-
                 <p>Our Practice</p>
 
                 <h2>
-                    A calm and welcoming environment where you can feel comfortable,
+                    A calm and welcoming environment
+                    where you can feel comfortable,
                     safe and supported.
                 </h2>
-
             </div>
 
             <div className="gallery-main">
-
                 <button
+                    type="button"
                     className="gallery-arrow"
                     onClick={previousImage}
+                    aria-label="Show previous image"
                 >
-                    <FaChevronLeft />
+                    <FaChevronLeft
+                        aria-hidden="true"
+                    />
                 </button>
 
                 <div className="gallery-image-frame">
                     <img
-                        src={locationGallery[currentImage].image}
-                        alt={locationGallery[currentImage].alt}
+                        src={currentGalleryImage.image}
+                        alt={currentGalleryImage.alt}
                         className="gallery-feature-image"
                     />
                 </div>
 
                 <button
+                    type="button"
                     className="gallery-arrow"
                     onClick={nextImage}
+                    aria-label="Show next image"
                 >
-                    <FaChevronRight />
+                    <FaChevronRight
+                        aria-hidden="true"
+                    />
                 </button>
-
             </div>
 
-            <div className="gallery-dots">
-
-                {locationGallery.map((_, index) => (
-
-                    <span
-                        key={index}
-                        className={
-                            index === currentImage
-                                ? "gallery-dot active"
-                                : "gallery-dot"
-                        }
-                    />
-
-                ))}
-
+            <div
+                className="gallery-dots"
+                aria-label="Choose gallery image"
+            >
+                {locationGallery.map(
+                    (image, index) => (
+                        <button
+                            key={image.id}
+                            type="button"
+                            className={
+                                index === currentImage
+                                    ? "gallery-dot active"
+                                    : "gallery-dot"
+                            }
+                            onClick={() =>
+                                setCurrentImage(index)
+                            }
+                            aria-label={`Show image ${
+                                index + 1
+                            }`}
+                            aria-current={
+                                index === currentImage
+                                    ? "true"
+                                    : undefined
+                            }
+                        />
+                    )
+                )}
             </div>
 
             <div className="gallery-thumbnails">
-
-                {locationGallery.map((image, index) => (
-
-                    <img
-                        key={image.id}
-                        src={image.image}
-                        alt={image.alt}
-                        className={
-                            index === currentImage
-                                ? "gallery-thumbnail active"
-                                : "gallery-thumbnail"
-                        }
-                        onClick={() => setCurrentImage(index)}
-                    />
-
-                ))}
-
+                {locationGallery.map(
+                    (image, index) => (
+                        <button
+                            key={image.id}
+                            type="button"
+                            className="gallery-thumbnail-button"
+                            onClick={() =>
+                                setCurrentImage(index)
+                            }
+                            aria-label={`Show ${image.alt}`}
+                            aria-current={
+                                index === currentImage
+                                    ? "true"
+                                    : undefined
+                            }
+                        >
+                            <img
+                                src={image.image}
+                                alt=""
+                                className={
+                                    index === currentImage
+                                        ? "gallery-thumbnail active"
+                                        : "gallery-thumbnail"
+                                }
+                            />
+                        </button>
+                    )
+                )}
             </div>
-
         </section>
-
     );
-
 }
 
 export default LocationGallery;

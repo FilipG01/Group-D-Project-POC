@@ -1,4 +1,4 @@
-import '../../styles/locationSection.css'
+import '../../styles/home/locationSection.css'
 
 function LocationSection() {
     return (

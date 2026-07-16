@@ -61,23 +61,26 @@ function AdminDashboard() {
                     </Link>
                 </article>
 
-                <article className="admin-dashboard-card is-disabled">
+                <article className="admin-dashboard-card">
                     <div>
                         <p className="admin-dashboard-card-label">
-                            Planned feature
+                            Content
                         </p>
 
-                        <h2>Blog</h2>
+                        <h2>Blog Management</h2>
 
                         <p>
-                            Create posts and review articles submitted by
-                            therapists.
+                            Review therapist submissions, publish posts
+                            and manage featured blog content.
                         </p>
                     </div>
 
-                    <span className="admin-dashboard-disabled-link">
-                        Coming soon
-                    </span>
+                    <Link
+                        to="/admin/blog"
+                        className="admin-dashboard-link"
+                    >
+                        Manage Blog →
+                    </Link>
                 </article>
             </section>
         </main>
