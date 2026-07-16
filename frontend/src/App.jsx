@@ -191,6 +191,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+                <Route
                     path="/therapist/blog"
                     element={
                         <ProtectedRoute allowedRoles={["THERAPIST"]}>
