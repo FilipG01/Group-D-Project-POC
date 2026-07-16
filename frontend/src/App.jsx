@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 
-import Header from './components/Header.jsx'
-import Footer from './components/Footer.jsx'
+import Header from './components/shared/Header.jsx'
+import Footer from './components/shared/Footer.jsx'
 
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
@@ -38,9 +38,9 @@ import TherapistBlogEditor from "./pages/therapist/TherapistBlogEditor.jsx";
 
 import NotFound from "./pages/errors/NotFound.jsx";
 
-import ScrollToTop from "./components/shared/ScrollToTop";
+import ScrollToTop from "./components/shared/ScrollToTop.jsx";
 
-import FloatingCallButton from "./components/shared/FloatingCallButton";
+import FloatingCallButton from "./components/shared/FloatingCallButton.jsx";
 
 function App() {
     return (

@@ -7,7 +7,7 @@ import {
     uploadOwnTherapistImage,
 } from "../../api/therapistsApi.js";
 
-import TherapistForm from "../../components/admin/TherapistForm.jsx";
+import TherapistForm from "../../components/therapists/TherapistForm.jsx";
 
 import "../../styles/adminTherapistForm.css";
 
