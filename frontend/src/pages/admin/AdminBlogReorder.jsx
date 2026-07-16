@@ -12,7 +12,7 @@ import {
 
 import { getImageUrl } from "../../utils/imageUrl.js";
 
-import "../../styles/adminBlogReorder.css";
+import "../../styles/blog/adminBlogReorder.css";
 
 function AdminBlogReorder() {
     const [posts, setPosts] = useState([]);

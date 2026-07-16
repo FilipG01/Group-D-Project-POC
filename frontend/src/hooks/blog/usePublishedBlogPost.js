@@ -55,7 +55,7 @@ export default function usePublishedBlogPost(slug) {
     // Reload when the slug changes or the user presses retry.
     useEffect(() => {
         /* eslint-disable react-hooks/set-state-in-effect */
-        loadPosts();
+        loadPost();
         /* eslint-enable react-hooks/set-state-in-effect */
     }, [loadPost, reloadKey]);
 

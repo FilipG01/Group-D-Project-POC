@@ -36,8 +36,8 @@
     height: 96px;
     margin: -4px auto -8px;
     background-color: #d7bd8f;
-    mask: url("../assets/file.svg") center / contain no-repeat;
-    -webkit-mask: url("../assets/file.svg") center / contain no-repeat;
+    mask: url("../../assets/file.svg") center / contain no-repeat;
+    -webkit-mask: url("../../assets/file.svg") center / contain no-repeat;
     transform: scaleX(1) rotate(60deg);
     transform-origin: center;
 }

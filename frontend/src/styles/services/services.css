@@ -147,6 +147,17 @@
     border-radius: 1.5rem;
 }
 
+.service-feature-image-placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 320px;
+    background: #d8cdb9;
+    color: #4f5d50;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
 .service-feature-content h2 {
     margin-bottom: 1.25rem;
     color: #4f5d50;

@@ -30,6 +30,21 @@
     gap: 2rem;
 
 }
+
+.gallery-thumbnail-button {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.gallery-thumbnail-button:focus-visible,
+.gallery-dot:focus-visible,
+.gallery-arrow:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}
+
 .gallery-feature-image {
     width: 100%;
     height: 650px;

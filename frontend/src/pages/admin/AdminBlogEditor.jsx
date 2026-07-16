@@ -7,7 +7,7 @@ import useAdminBlogEditor from "../../hooks/blog/useAdminBlogEditor.js";
 
 import { formatBlogStatus } from "../../utils/blog/blogFormatters.js";
 
-import "../../styles/adminBlogEditor.css";
+import "../../styles/blog/adminBlogEditor.css";
 
 function AdminBlogEditor() {
     const {
@@ -226,7 +226,7 @@ function AdminBlogEditor() {
                 <aside className="admin-blog-editor-sidebar">
                     <BlogImageUpload
                         imageUrl={form.featuredImageUrl}
-                        isEditable={true}
+                        canEdit={true}
                         isUploading={isUploading}
                         uploadInputId="admin-blog-image"
                         uploadLabel="Upload Image"

@@ -18,7 +18,7 @@ import {
 
 import { getImageUrl } from "../../utils/imageUrl.js";
 
-import "../../styles/adminBlogReview.css";
+import "../../styles/blog/adminBlogReview.css";
 
 function formatStatus(status) {
     if (!status) {

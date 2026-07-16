@@ -45,18 +45,6 @@ export async function getPublicTherapists() {
     return handleResponse(response);
 }
 
-export async function getPublicTherapist(userId) {
-    const response = await fetch(
-        `${API_BASE_URL}/api/therapists/public/${userId}`,
-        {
-            method: "GET",
-            credentials: "include",
-        }
-    );
-
-    return handleResponse(response);
-}
-
 /*
  * Therapist self-management
  */

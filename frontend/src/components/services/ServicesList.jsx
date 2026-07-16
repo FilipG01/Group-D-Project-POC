@@ -1,27 +1,13 @@
-import { useEffect, useState } from "react";
-import { getPublishedServices } from "../../api/servicesApi.js";
 import ServicesFeatureSection from "./ServicesFeatureSection.jsx";
+import usePublishedServices from "../../hooks/services/usePublishedServices.js";
 
 function ServicesList() {
-    const [services, setServices] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState("");
-
-    useEffect(() => {
-        async function loadServices() {
-            try {
-                const data = await getPublishedServices();
-                setServices(data);
-            } catch (requestError) {
-                console.error(requestError);
-                setError("Services could not be loaded. Please try again later.");
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        loadServices();
-    }, []);
+    const {
+        services,
+        isLoading,
+        error,
+        reload,
+    } = usePublishedServices();
 
     if (isLoading) {
         return (
@@ -36,9 +22,16 @@ function ServicesList() {
     if (error) {
         return (
             <section className="services-feature-list">
-                <p className="services-status-message services-error-message">
-                    {error}
-                </p>
+                <div className="services-status-message services-error-message">
+                    <p>{error}</p>
+
+                    <button
+                        type="button"
+                        onClick={reload}
+                    >
+                        Try again
+                    </button>
+                </div>
             </section>
         );
     }

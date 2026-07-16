@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../../styles/therapistDashboard.css";
+import "../../styles/therapists/therapistDashboard.css";
 
 function TherapistDashboard() {
     return (

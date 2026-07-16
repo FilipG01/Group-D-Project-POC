@@ -1,39 +1,27 @@
-import { useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
-import { getImageUrl } from "../utils/imageUrl.js";
+import {
+    Link,
+    Navigate,
+    useParams,
+} from "react-router-dom";
 
-import { getServiceBySlug } from "../api/servicesApi.js";
 import ContactCTA from "../components/shared/ContactCTA.jsx";
 import SEO from "../components/shared/SEO.jsx";
 import { SITE_URL } from "../data/pageMetaData.js";
+import usePublishedService from "../hooks/services/usePublishedService.js";
+import { getImageUrl } from "../utils/imageUrl.js";
 
-import "../styles/serviceDetail.css";
+import "../styles/services/serviceDetail.css";
 
 function ServiceDetail() {
     const { serviceSlug } = useParams();
 
-    const [service, setService] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState("");
-
-    useEffect(() => {
-        async function loadService() {
-            setIsLoading(true);
-            setError("");
-
-            try {
-                const data = await getServiceBySlug(serviceSlug);
-                setService(data);
-            } catch (requestError) {
-                console.error(requestError);
-                setError("Service not found.");
-            } finally {
-                setIsLoading(false);
-            }
-        }
-
-        loadService();
-    }, [serviceSlug]);
+    const {
+        service,
+        isLoading,
+        notFound,
+        error,
+        reload,
+    } = usePublishedService(serviceSlug);
 
     if (isLoading) {
         return (
@@ -43,22 +31,53 @@ function ServiceDetail() {
         );
     }
 
-    if (error || !service) {
+    if (notFound) {
         return <Navigate to="/404" replace />;
     }
 
-    const canonicalUrl = `${SITE_URL}/services/${service.slug}`;
+    if (error || !service) {
+        return (
+            <main className="service-detail-page service-detail-status">
+                <h1>Unable to load service</h1>
 
-    const shareImage = service.imageUrl?.startsWith("http")
-        ? service.imageUrl
-        : `${SITE_URL}${service.imageUrl || ""}`;
+                <p>{error}</p>
 
-    const displayImageUrl = getImageUrl(service.imageUrl);
+                <button
+                    type="button"
+                    onClick={reload}
+                >
+                    Try again
+                </button>
+
+                <Link
+                    to="/services"
+                    className="services-cta-button"
+                >
+                    Return to services
+                </Link>
+            </main>
+        );
+    }
+
+    const canonicalUrl =
+        `${SITE_URL}/services/${service.slug}`;
+
+    const shareImage = service.imageUrl
+        ? service.imageUrl.startsWith("http")
+            ? service.imageUrl
+            : `${SITE_URL}${service.imageUrl}`
+        : undefined;
+
+    const displayImageUrl =
+        getImageUrl(service.imageUrl);
 
     return (
         <>
             <SEO
-                title={service.metaTitle || service.title}
+                title={
+                    service.metaTitle ||
+                    service.title
+                }
                 description={
                     service.metaDescription ||
                     service.shortDescription
@@ -78,16 +97,25 @@ function ServiceDetail() {
                             : "none",
                     }}
                 >
-                    <div className="service-detail-overlay"></div>
+                    <div
+                        className="service-detail-overlay"
+                        aria-hidden="true"
+                    />
 
                     <div className="service-detail-hero-content">
-                        <p className="section-label">
-                            {service.category}
-                        </p>
+                        {service.category && (
+                            <p className="section-label">
+                                {service.category}
+                            </p>
+                        )}
 
                         <h1>{service.title}</h1>
 
-                        <p>{service.shortDescription}</p>
+                        {service.shortDescription && (
+                            <p>
+                                {service.shortDescription}
+                            </p>
+                        )}
                     </div>
                 </section>
 
@@ -96,8 +124,13 @@ function ServiceDetail() {
                         <h2>About this service</h2>
 
                         {service.fullDescription?.map(
-                            (paragraph, index) => (
-                                <p key={`${service.id}-paragraph-${index}`}>
+                            (
+                                paragraph,
+                                paragraphIndex
+                            ) => (
+                                <p
+                                    key={`${service.id}-paragraph-${paragraphIndex}`}
+                                >
                                     {paragraph}
                                 </p>
                             )
@@ -107,11 +140,17 @@ function ServiceDetail() {
                     <aside className="service-detail-card">
                         <h2>Therapy can help with</h2>
 
-                        <ul>
-                            {service.points?.map((point) => (
-                                <li key={point}>{point}</li>
-                            ))}
-                        </ul>
+                        {service.points?.length > 0 && (
+                            <ul>
+                                {service.points.map(
+                                    (point) => (
+                                        <li key={point}>
+                                            {point}
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+                        )}
 
                         <Link
                             to="/contact"

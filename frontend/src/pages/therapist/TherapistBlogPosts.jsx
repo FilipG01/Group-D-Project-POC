@@ -15,7 +15,7 @@ import {
     formatBlogDateTime,
 } from "../../utils/blog/blogFormatters.js";
 
-import "../../styles/therapistBlog.css";
+import "../../styles/blog/therapistBlog.css";
 
 const EDITABLE_STATUSES = new Set([
     "DRAFT",

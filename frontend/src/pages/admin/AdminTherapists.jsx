@@ -7,7 +7,7 @@ import {
 } from "../../api/therapistsApi.js";
 
 import { getImageUrl } from "../../utils/imageUrl.js";
-import "../../styles/adminTherapists.css";
+import "../../styles/therapists/adminTherapists.css";
 
 function AdminTherapists() {
     const [therapists, setTherapists] = useState([]);

@@ -8,7 +8,7 @@ import BlogImageUpload from "../../components/blog/shared/BlogImageUpload.jsx";
 import BlogSeoFields from "../../components/blog/shared/BlogSeoFields.jsx";
 import BlogEditorFields from "../../components/blog/shared/BlogEditorFields.jsx";
 
-import "../../styles/therapistBlogEditor.css";
+import "../../styles/blog/therapistBlogEditor.css";
 
 
 
@@ -168,7 +168,7 @@ function TherapistBlogEditor() {
                 <aside className="therapist-blog-editor-sidebar">
                     <BlogImageUpload
                         imageUrl={form.featuredImageUrl}
-                        isEditable={isEditable}
+                        canEdit={isEditable}
                         isUploading={isUploading}
                         uploadInputId="therapist-blog-image"
                         onUpload={handleImageUpload}

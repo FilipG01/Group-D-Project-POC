@@ -6,7 +6,7 @@ import SEO from "../components/shared/SEO.jsx";
 import { SITE_URL } from "../data/pageMetaData.js";
 import usePublishedBlogPosts from "../hooks/blog/usePublishedBlogPosts.js";
 
-import "../styles/blog.css";
+import "../styles/blog/blog.css";
 
 function Blog() {
     const {

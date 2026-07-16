@@ -15,7 +15,7 @@ import {
 } from "../utils/blog/blogFormatters.js";
 import { getImageUrl } from "../utils/imageUrl.js";
 
-import "../styles/blogDetail.css";
+import "../styles/blog/blogDetail.css";
 
 function BlogDetail() {
     const { slug } = useParams();

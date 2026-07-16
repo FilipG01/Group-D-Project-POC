@@ -6,8 +6,8 @@ import {
     updateService,
 } from "../../api/servicesApi.js";
 
-import ServiceForm from "../../components/admin/ServiceForm.jsx";
-import "../../styles/adminServiceForm.css";
+import ServiceForm from "../../components/services/admin/ServiceForm.jsx";
+import "../../styles/services/adminServiceForm.css";
 
 function AdminServiceEdit() {
     const { serviceId } = useParams();

@@ -8,7 +8,7 @@ function AboutHero() {
                 </p>
 
                 <h1>
-                    Learn more about out location and team of experts
+                    Learn more about our location and team of experts
                 </h1>
 
                 <p>

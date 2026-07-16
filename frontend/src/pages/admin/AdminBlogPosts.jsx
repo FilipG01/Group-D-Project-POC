@@ -14,7 +14,7 @@ import {
     unpublishAdminBlogPost,
 } from "../../api/adminBlogApi.js";
 
-import "../../styles/adminBlog.css";
+import "../../styles/blog/adminBlog.css";
 
 const STATUS_OPTIONS = [
     {
