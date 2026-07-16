@@ -1,0 +1,257 @@
+.admin-blog-reorder-page {
+    min-height: 100vh;
+    padding: 5rem 8%;
+    background: #f5f0e6;
+    color: #2f352f;
+}
+
+.admin-blog-reorder-header,
+.admin-blog-reorder-list,
+.admin-blog-reorder-message,
+.admin-blog-reorder-status,
+.admin-blog-reorder-unsaved {
+    width: min(100%, 1180px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.admin-blog-reorder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.admin-blog-reorder-header h1 {
+    margin: 0.7rem 0 1rem;
+    color: #4f5d50;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+}
+
+.admin-blog-reorder-header p:last-child {
+    max-width: 720px;
+    line-height: 1.7;
+}
+
+.admin-blog-reorder-back {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #4f5d50;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-blog-reorder-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-blog-reorder-card {
+    display: grid;
+    grid-template-columns:
+        54px
+        130px
+        minmax(0, 1fr)
+        auto;
+    align-items: center;
+    gap: 1.25rem;
+
+    padding: 1.25rem;
+    background: #e3d7c1;
+    border: 1px solid rgba(79, 93, 80, 0.16);
+    border-radius: 1.25rem;
+    box-shadow: 0 12px 30px rgba(47, 53, 47, 0.07);
+}
+
+.admin-blog-reorder-position {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    background: #4f5d50;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.admin-blog-reorder-image {
+    width: 130px;
+    height: 88px;
+    object-fit: cover;
+    border-radius: 0.85rem;
+}
+
+.admin-blog-reorder-placeholder {
+    display: grid;
+    place-items: center;
+    background: #d2c5ae;
+    color: #666b64;
+    font-size: 0.82rem;
+}
+
+.admin-blog-reorder-content {
+    min-width: 0;
+}
+
+.admin-blog-reorder-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.admin-blog-reorder-title-row h2 {
+    margin: 0;
+    color: #4f5d50;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.admin-blog-reorder-content p {
+    margin: 0.6rem 0;
+    overflow: hidden;
+    color: #51564f;
+    line-height: 1.55;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-blog-reorder-current {
+    color: #737970;
+    font-size: 0.82rem;
+}
+
+.admin-blog-reorder-featured {
+    padding: 0.28rem 0.65rem;
+    background: #d7bd8f;
+    color: #443716;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.admin-blog-reorder-actions {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.admin-blog-reorder-actions button,
+.admin-blog-reorder-save,
+.admin-blog-reorder-message button {
+    min-height: 42px;
+    padding: 0 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+.admin-blog-reorder-actions button {
+    background: transparent;
+    color: #4f5d50;
+    border: 1px solid #4f5d50;
+}
+
+.admin-blog-reorder-save {
+    background: #4f5d50;
+    color: #fff;
+    border: 1px solid #4f5d50;
+}
+
+.admin-blog-reorder-actions button:disabled,
+.admin-blog-reorder-save:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.admin-blog-reorder-message,
+.admin-blog-reorder-status,
+.admin-blog-reorder-unsaved {
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+}
+
+.admin-blog-reorder-success {
+    background: #dce8d8;
+    color: #36533a;
+}
+
+.admin-blog-reorder-error {
+    background: #efd2d2;
+    color: #793636;
+}
+
+.admin-blog-reorder-error p {
+    margin-top: 0;
+}
+
+.admin-blog-reorder-message button {
+    background: transparent;
+    color: inherit;
+    border: 1px solid currentColor;
+}
+
+.admin-blog-reorder-status {
+    min-height: 260px;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 1rem;
+    background: #e3d7c1;
+    text-align: center;
+}
+
+.admin-blog-reorder-unsaved {
+    position: sticky;
+    bottom: 1rem;
+    margin-top: 1.5rem;
+    background: #f1dfb9;
+    color: #604b1c;
+    box-shadow: 0 10px 30px rgba(47, 53, 47, 0.15);
+    text-align: center;
+    font-weight: 700;
+}
+
+@media (max-width: 850px) {
+    .admin-blog-reorder-page {
+        padding: 4rem 6%;
+    }
+
+    .admin-blog-reorder-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-blog-reorder-card {
+        grid-template-columns: 46px 90px 1fr;
+    }
+
+    .admin-blog-reorder-image {
+        width: 90px;
+        height: 72px;
+    }
+
+    .admin-blog-reorder-actions {
+        grid-column: 1 / -1;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .admin-blog-reorder-card {
+        grid-template-columns: 46px 1fr;
+    }
+
+    .admin-blog-reorder-image {
+        display: none;
+    }
+
+    .admin-blog-reorder-content p {
+        white-space: normal;
+    }
+}

@@ -55,6 +55,8 @@ public class SecurityConfig {
                                 "/api/services/**",
                                 "/api/therapists/public",
                                 "/api/therapists/public/**",
+                                "/api/blog",
+                                "/api/blog/**",
                                 "/uploads/**"
                         ).permitAll()
 
@@ -62,6 +64,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/therapist-profile",
                                 "/api/therapist-profile/**",
+                                "/api/therapist/blog",
+                                "/api/therapist/blog/**",
                                 "/api/therapist/uploads",
                                 "/api/therapist/uploads/**"
                         ).hasRole("THERAPIST")
@@ -72,6 +76,8 @@ public class SecurityConfig {
                                 "/api/admin/services/**",
                                 "/api/admin/uploads",
                                 "/api/admin/uploads/**",
+                                "/api/admin/blog",
+                                "/api/admin/blog/**",
                                 "/api/admin/therapists",
                                 "/api/admin/therapists/**"
                         ).hasRole("ADMIN")
