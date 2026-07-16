@@ -1,5 +1,6 @@
 import "../styles/ContactForm.css";
 import emailjs from "@emailjs/browser";
+import { Link } from "react-router-dom";
 
 function ContactForm() {
     function handleSubmit(event) {
@@ -85,6 +86,26 @@ function ContactForm() {
                     <button type="submit">Send</button>
                 </div>
             </form>
+
+            <section className="contact-register-msg">
+
+                <p className="section-label">
+                    Online Services
+                </p>
+
+                <h2>
+                    Prefer to manage everything online?
+                </h2>
+
+                <p>
+                    Create an account to book appointments, manage your details, and access
+                    your personal space. If you have any questions, you can still contact us using
+                    the form above.
+                </p>
+
+                <Link to="/register" className="contact-register-button">
+                Create an Account → </Link>
+            </section>
 
             <aside className="contact-form-note">
                 <h2>You don't need to know exactly what to say.</h2>
