@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { listMessages, sendMessage } from "../../api/apiMessaging";
+import { useAuth } from "../../auth/useAuth.js";
 
 function ClientMessages({ conversation }) {
+    const { user } = useAuth();
     const [messages, setMessages] = useState([]);
     const [messageText, setMessageText] = useState("");
     const [loading, setLoading] = useState(true);
@@ -49,25 +51,37 @@ function ClientMessages({ conversation }) {
 
     return (
         <section className="client-messages">
-            <header>
-                <h2>Chat</h2>
-                <p>
-                    Conversation with {conversation.therapistFirstName} {conversation.therapistLastName}
-                </p>
+            <header className="client-messages-header">
+                    <h2>{conversation.therapistFirstName} {conversation.therapistLastName}</h2>
             </header>
 
             {loading && <p>Loading messages...</p>}
             {error && <p>{error}</p>}
 
             <div className="client-messages-thread">
-                {messages.map((message) => (
-                    <article key={message.id} className="client-message">
-                         <small>
-                            {message.senderFirstName} {message.senderLastName}
-                        </small>
-                        <p>{message.ciphertext}</p>
-                    </article>
-                ))}
+                {messages.map((message) => {
+                    const isCurrentUser = message.senderUserId === user?.id;
+
+                    return (
+                        <article
+                            key={message.id}
+                            className={
+                                isCurrentUser
+                                    ? "client-message client-message--sent"
+                                    : "client-message client-message--received"
+                            }
+                        >
+                            <div className="client-message-content">
+                                <div className="client-message-bubble">
+                                    <p>{message.ciphertext}</p>
+                                </div>
+                                <small>
+                                    {message.senderFirstName} {message.senderLastName}
+                                </small>
+                            </div>
+                        </article>
+                    );
+                })}
             </div>
 
             <form className="client-message-form" onSubmit={handleSendMessage}>
