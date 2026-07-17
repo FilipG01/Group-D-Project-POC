@@ -1,33 +1,52 @@
 package com.roottherapy.backend.profile.therapist;
 
-
-import com.roottherapy.backend.profile.therapist.dto.TherapistProfileRequest;
-import com.roottherapy.backend.profile.therapist.dto.TherapistProfileResponse;
+import com.roottherapy.backend.profile.therapist.dto.AdminTherapistProfileResponse;
+import com.roottherapy.backend.profile.therapist.dto.UpdateOwnTherapistProfileRequest;
 import com.roottherapy.backend.security.CustomUserDetails;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/therapist-profile")
 public class TherapistProfileController {
 
-    private final TherapistProfileService therapistProfileService;
+    private final TherapistProfileManagementService managementService;
 
-    public TherapistProfileController(TherapistProfileService therapistProfileService) {
-        this.therapistProfileService = therapistProfileService;
+    public TherapistProfileController(
+            TherapistProfileManagementService managementService
+    ) {
+        this.managementService = managementService;
     }
 
     @GetMapping("/me")
-    public TherapistProfileResponse getMyProfile(Authentication auth){
-        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
-        return therapistProfileService.getMyProfile(userDetails.getUser());
+    public AdminTherapistProfileResponse getMyProfile(
+            Authentication authentication
+    ) {
+        return managementService.getOwnProfile(
+                getAuthenticatedUserId(authentication)
+        );
     }
 
     @PutMapping("/me")
-    public TherapistProfileResponse updateMyProfile(Authentication auth, @Valid @RequestBody TherapistProfileRequest req){
-        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
-        return therapistProfileService.updateMyProfile(userDetails.getUser(), req);
+    public AdminTherapistProfileResponse updateMyProfile(
+            Authentication authentication,
+            @Valid @RequestBody UpdateOwnTherapistProfileRequest request
+    ) {
+        return managementService.updateOwnProfile(
+                getAuthenticatedUserId(authentication),
+                request
+        );
+    }
+
+    private UUID getAuthenticatedUserId(
+            Authentication authentication
+    ) {
+        CustomUserDetails userDetails =
+                (CustomUserDetails) authentication.getPrincipal();
+
+        return userDetails.getUser().getId();
     }
 }
-

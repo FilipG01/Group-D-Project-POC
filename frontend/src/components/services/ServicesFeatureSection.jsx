@@ -1,31 +1,70 @@
 import { Link } from "react-router-dom";
 
-function ServiceFeatureSection({ service, index }) {
+import { getImageUrl } from "../../utils/imageUrl.js";
+
+function ServicesFeatureSection({ service, index }) {
     const isReversed = index % 2 !== 0;
+    const imageUrl = getImageUrl(service.imageUrl);
+    const points = service.points || [];
 
     return (
-        <section className={`service-feature ${isReversed ? "service-feature-reverse" : ""}`}>
+        <article
+            className={`service-feature ${
+                isReversed
+                    ? "service-feature-reverse"
+                    : ""
+            }`}
+        >
             <div className="service-feature-image">
-                <img src={service.image} alt={service.title} />
+                {imageUrl ? (
+                    <img
+                        src={imageUrl}
+                        alt={service.title}
+                    />
+                ) : (
+                    <div
+                        className="service-feature-image-placeholder"
+                        aria-hidden="true"
+                    >
+                        Root Therapy
+                    </div>
+                )}
             </div>
 
             <div className="service-feature-content">
-                <p className="section-label">{service.category}</p>
+                {service.category && (
+                    <p className="section-label">
+                        {service.category}
+                    </p>
+                )}
+
                 <h2>{service.title}</h2>
-                <p>{service.shortDescription}</p>
 
-                <ul>
-                    {service.points.map((point) => (
-                        <li key={point}>{point}</li>
-                    ))}
-                </ul>
+                {service.shortDescription && (
+                    <p>{service.shortDescription}</p>
+                )}
 
-                <Link to={service.path} className="services-cta-button">
+                {points.length > 0 && (
+                    <ul>
+                        {points.map((point, pointIndex) => (
+                            <li
+                                key={`${service.id}-point-${pointIndex}`}
+                            >
+                                {point}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+
+                <Link
+                    to={`/services/${service.slug}`}
+                    className="services-cta-button"
+                >
                     Learn More →
                 </Link>
             </div>
-        </section>
+        </article>
     );
 }
 
-export default ServiceFeatureSection;
+export default ServicesFeatureSection;

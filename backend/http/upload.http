@@ -1,0 +1,27 @@
+### Log in as admin
+
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "filipgnitecki@gmail.com",
+  "password": "password123"
+}
+
+
+### Confirm current user
+
+GET http://localhost:8080/api/auth/me
+
+
+### Upload service image
+
+POST http://localhost:8080/api/admin/uploads/services
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test-image.jpg"
+Content-Type: image/jpeg
+
+< ./test-image.jpg
+--WebAppBoundary--

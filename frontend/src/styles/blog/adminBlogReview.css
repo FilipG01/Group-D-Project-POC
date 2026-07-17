@@ -1,0 +1,205 @@
+.admin-blog-review-page {
+    min-height: 100vh;
+    padding: 5rem 8%;
+    background: #f5f0e6;
+    color: #2f352f;
+}
+
+.admin-blog-review-header,
+.admin-blog-review-layout,
+.admin-blog-review-message {
+    width: min(100%, 1180px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.admin-blog-review-header {
+    margin-bottom: 2rem;
+}
+
+.admin-blog-review-header h1 {
+    margin: 0.7rem 0 1rem;
+    color: #4f5d50;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+}
+
+.admin-blog-review-back {
+    color: #4f5d50;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-blog-review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    color: #676d65;
+}
+
+.admin-blog-review-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(280px, 0.65fr);
+    gap: 2rem;
+}
+
+.admin-blog-review-article,
+.admin-blog-review-panel {
+    padding: 2rem;
+    background: #e3d7c1;
+    border-radius: 1.5rem;
+    box-shadow: 0 16px 40px rgba(47, 53, 47, 0.08);
+}
+
+.admin-blog-review-image {
+    display: block;
+    width: 100%;
+    max-height: 480px;
+    margin-bottom: 2rem;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.admin-blog-review-summary {
+    color: #4f5d50;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+.admin-blog-review-body p {
+    line-height: 1.9;
+}
+
+.admin-blog-review-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.admin-blog-review-panel h2 {
+    margin: 0 0 1.25rem;
+    color: #4f5d50;
+}
+
+.admin-blog-review-panel dl {
+    margin: 0;
+}
+
+.admin-blog-review-panel dl div {
+    margin-bottom: 1rem;
+}
+
+.admin-blog-review-panel dt {
+    color: #72776f;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.admin-blog-review-panel dd {
+    margin: 0.3rem 0 0;
+    overflow-wrap: anywhere;
+}
+
+.admin-blog-review-panel label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.admin-blog-review-panel textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.9rem;
+    background: #fffdf8;
+    border: 1px solid rgba(79, 93, 80, 0.3);
+    border-radius: 0.8rem;
+    font: inherit;
+    resize: vertical;
+}
+
+.admin-blog-review-character-count {
+    display: block;
+    margin-top: 0.4rem;
+    text-align: right;
+    color: #757a72;
+    font-size: 0.8rem;
+}
+
+.admin-blog-review-actions {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.admin-blog-review-primary-button,
+.admin-blog-review-secondary-button,
+.admin-blog-review-warning-button,
+.admin-blog-review-danger-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-blog-review-primary-button {
+    background: #4f5d50;
+    color: #fff;
+    border: 1px solid #4f5d50;
+}
+
+.admin-blog-review-secondary-button {
+    background: transparent;
+    color: #4f5d50;
+    border: 1px solid #4f5d50;
+}
+
+.admin-blog-review-warning-button {
+    background: #d7bd8f;
+    color: #3f3317;
+    border: 1px solid #b89c68;
+}
+
+.admin-blog-review-danger-button {
+    background: #8a4343;
+    color: #fff;
+    border: 1px solid #8a4343;
+}
+
+.admin-blog-review-message {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.admin-blog-review-error {
+    background: #efd2d2;
+    color: #793636;
+}
+
+.admin-blog-review-status {
+    min-height: 60vh;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .admin-blog-review-page {
+        padding: 4rem 6%;
+    }
+
+    .admin-blog-review-layout {
+        grid-template-columns: 1fr;
+    }
+}

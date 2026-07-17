@@ -41,7 +41,48 @@ public class SecurityConfig {
         return http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/register/client", "/api/auth/login").permitAll()
+
+                        // Public authentication endpoints
+                        .requestMatchers(
+                                "/api/auth/register/client",
+                                "/api/auth/login"
+                        ).permitAll()
+
+                        // Public website content
+                        .requestMatchers(
+                                org.springframework.http.HttpMethod.GET,
+                                "/api/services",
+                                "/api/services/**",
+                                "/api/therapists/public",
+                                "/api/therapists/public/**",
+                                "/api/blog",
+                                "/api/blog/**",
+                                "/uploads/**"
+                        ).permitAll()
+
+                        // Therapist self-management
+                        .requestMatchers(
+                                "/api/therapist-profile",
+                                "/api/therapist-profile/**",
+                                "/api/therapist/blog",
+                                "/api/therapist/blog/**",
+                                "/api/therapist/uploads",
+                                "/api/therapist/uploads/**"
+                        ).hasRole("THERAPIST")
+
+                        // Admin content management
+                        .requestMatchers(
+                                "/api/admin/services",
+                                "/api/admin/services/**",
+                                "/api/admin/uploads",
+                                "/api/admin/uploads/**",
+                                "/api/admin/blog",
+                                "/api/admin/blog/**",
+                                "/api/admin/therapists",
+                                "/api/admin/therapists/**"
+                        ).hasRole("ADMIN")
+
+                        // Everything else requires authentication
                         .anyRequest().authenticated()
                 ).build();
     }
@@ -52,7 +93,7 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of("http://localhost:5173"));
         config.setAllowCredentials(true);
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

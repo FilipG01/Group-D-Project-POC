@@ -1,65 +1,169 @@
-import { useParams, Link } from "react-router-dom";
-import { services } from "../data/servicesData";
-import ContactCTA from "../components/shared/ContactCTA";
-import "../styles/serviceDetail.css";
+import {
+    Link,
+    Navigate,
+    useParams,
+} from "react-router-dom";
+
+import ContactCTA from "../components/shared/ContactCTA.jsx";
+import SEO from "../components/shared/SEO.jsx";
+import { SITE_URL } from "../data/pageMetaData.js";
+import usePublishedService from "../hooks/services/usePublishedService.js";
+import { getImageUrl } from "../utils/imageUrl.js";
+
+import "../styles/services/serviceDetail.css";
 
 function ServiceDetail() {
     const { serviceSlug } = useParams();
 
-    const service = services.find(
-        (item) => item.path === `/services/${serviceSlug}`
-    );
+    const {
+        service,
+        isLoading,
+        notFound,
+        error,
+        reload,
+    } = usePublishedService(serviceSlug);
 
-    if (!service) {
+    if (isLoading) {
         return (
-            <main className="service-detail-page">
-                <h1>Service not found</h1>
-                <Link to="/services">Back to Services</Link>
+            <main className="service-detail-page service-detail-status">
+                <p>Loading service...</p>
             </main>
         );
     }
 
+    if (notFound) {
+        return <Navigate to="/404" replace />;
+    }
+
+    if (error || !service) {
+        return (
+            <main className="service-detail-page service-detail-status">
+                <h1>Unable to load service</h1>
+
+                <p>{error}</p>
+
+                <button
+                    type="button"
+                    onClick={reload}
+                >
+                    Try again
+                </button>
+
+                <Link
+                    to="/services"
+                    className="services-cta-button"
+                >
+                    Return to services
+                </Link>
+            </main>
+        );
+    }
+
+    const canonicalUrl =
+        `${SITE_URL}/services/${service.slug}`;
+
+    const shareImage = service.imageUrl
+        ? service.imageUrl.startsWith("http")
+            ? service.imageUrl
+            : `${SITE_URL}${service.imageUrl}`
+        : undefined;
+
+    const displayImageUrl =
+        getImageUrl(service.imageUrl);
+
     return (
-        <main className="service-detail-page">
-            <section
-                className="service-detail-hero"
-                style={{ backgroundImage: `url(${service.image})` }}
-            >
-                <div className="service-detail-overlay"></div>
+        <>
+            <SEO
+                title={
+                    service.metaTitle ||
+                    service.title
+                }
+                description={
+                    service.metaDescription ||
+                    service.shortDescription
+                }
+                keywords={service.keywords}
+                canonical={canonicalUrl}
+                image={shareImage}
+                type="article"
+            />
 
-                <div className="service-detail-hero-content">
-                    <p className="section-label">{service.category}</p>
-                    <h1>{service.title}</h1>
-                    <p>{service.shortDescription}</p>
-                </div>
-            </section>
+            <main className="service-detail-page">
+                <section
+                    className="service-detail-hero"
+                    style={{
+                        backgroundImage: displayImageUrl
+                            ? `url(${displayImageUrl})`
+                            : "none",
+                    }}
+                >
+                    <div
+                        className="service-detail-overlay"
+                        aria-hidden="true"
+                    />
 
-            <section className="service-detail-content">
-                <div className="service-detail-text">
-                    <h2>About this service</h2>
+                    <div className="service-detail-hero-content">
+                        {service.category && (
+                            <p className="section-label">
+                                {service.category}
+                            </p>
+                        )}
 
-                    {service.fullDescription?.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                    ))}
-                </div>
+                        <h1>{service.title}</h1>
 
-                <aside className="service-detail-card">
-                    <h2>Therapy can help with</h2>
+                        {service.shortDescription && (
+                            <p>
+                                {service.shortDescription}
+                            </p>
+                        )}
+                    </div>
+                </section>
 
-                    <ul>
-                        {service.points.map((point) => (
-                            <li key={point}>{point}</li>
-                        ))}
-                    </ul>
+                <section className="service-detail-content">
+                    <div className="service-detail-text">
+                        <h2>About this service</h2>
 
-                    <Link to="/contact" className="services-cta-button">
-                        Contact Us →
-                    </Link>
-                </aside>
-            </section>
+                        {service.fullDescription?.map(
+                            (
+                                paragraph,
+                                paragraphIndex
+                            ) => (
+                                <p
+                                    key={`${service.id}-paragraph-${paragraphIndex}`}
+                                >
+                                    {paragraph}
+                                </p>
+                            )
+                        )}
+                    </div>
 
-            <ContactCTA />
-        </main>
+                    <aside className="service-detail-card">
+                        <h2>Therapy can help with</h2>
+
+                        {service.points?.length > 0 && (
+                            <ul>
+                                {service.points.map(
+                                    (point) => (
+                                        <li key={point}>
+                                            {point}
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+                        )}
+
+                        <Link
+                            to="/contact"
+                            className="services-cta-button"
+                        >
+                            Contact Us →
+                        </Link>
+                    </aside>
+                </section>
+
+                <ContactCTA />
+            </main>
+        </>
     );
 }
 

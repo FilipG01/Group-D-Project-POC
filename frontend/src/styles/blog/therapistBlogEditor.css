@@ -1,0 +1,280 @@
+.therapist-blog-editor-page {
+    min-height: 100vh;
+    padding: 5rem 8%;
+    background: #f5f0e6;
+    color: #2f352f;
+}
+
+.therapist-blog-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+
+    width: min(100%, 1180px);
+    margin: 0 auto 2rem;
+}
+
+.therapist-blog-editor-header h1 {
+    margin: 0.7rem 0 1rem;
+    color: #4f5d50;
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
+    font-weight: 500;
+}
+
+.therapist-blog-editor-back {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #4f5d50;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.therapist-blog-editor-back:hover {
+    text-decoration: underline;
+}
+
+.therapist-blog-editor-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    color: #676d65;
+}
+
+.therapist-blog-editor-form {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.55fr)
+        minmax(280px, 0.65fr);
+    gap: 2rem;
+
+    width: min(100%, 1180px);
+    margin: 0 auto;
+}
+
+.therapist-blog-editor-main,
+.therapist-blog-editor-panel {
+    padding: 2rem;
+    background: #e3d7c1;
+    border: 1px solid rgba(79, 93, 80, 0.16);
+    border-radius: 1.5rem;
+    box-shadow: 0 16px 40px rgba(47, 53, 47, 0.08);
+}
+
+.therapist-blog-editor-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.therapist-blog-editor-panel h2 {
+    margin: 0 0 1.5rem;
+    color: #4f5d50;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.therapist-editor-field {
+    margin-bottom: 1.5rem;
+}
+
+.therapist-editor-field:last-child {
+    margin-bottom: 0;
+}
+
+.therapist-editor-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #3f493f;
+    font-weight: 700;
+}
+
+.therapist-editor-field input,
+.therapist-editor-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.85rem 1rem;
+
+    background: #fffdf8;
+    color: #2f352f;
+    border: 1px solid rgba(79, 93, 80, 0.3);
+    border-radius: 0.8rem;
+
+    font: inherit;
+    line-height: 1.6;
+}
+
+.therapist-editor-field textarea {
+    resize: vertical;
+}
+
+.therapist-editor-field input:focus,
+.therapist-editor-field textarea:focus {
+    outline: 3px solid rgba(79, 93, 80, 0.16);
+    border-color: #4f5d50;
+}
+
+.therapist-editor-field input:disabled,
+.therapist-editor-field textarea:disabled {
+    cursor: not-allowed;
+    background: #eee9df;
+    color: #656a63;
+}
+
+.therapist-editor-field > span {
+    display: block;
+    margin-top: 0.4rem;
+    color: #747970;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.therapist-blog-image-preview {
+    display: block;
+    width: 100%;
+    max-height: 260px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.therapist-blog-image-placeholder {
+    display: grid;
+    place-items: center;
+    min-height: 180px;
+    margin-bottom: 1rem;
+
+    background: #d5c8b2;
+    color: #666b64;
+    border: 1px dashed rgba(79, 93, 80, 0.35);
+    border-radius: 1rem;
+}
+
+.therapist-blog-upload-button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.therapist-blog-remove-image {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.7rem;
+
+    background: transparent;
+    color: #803d3d;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+.therapist-blog-editor-actions {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.therapist-editor-primary-button,
+.therapist-editor-secondary-button,
+.therapist-editor-submit-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 1.2rem;
+
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.therapist-editor-primary-button {
+    background: #4f5d50;
+    color: #fff;
+    border: 1px solid #4f5d50;
+}
+
+.therapist-editor-secondary-button {
+    background: transparent;
+    color: #4f5d50;
+    border: 1px solid #4f5d50;
+}
+
+.therapist-editor-submit-button {
+    background: #d7bd8f;
+    color: #2f352f;
+    border: 1px solid #b89c68;
+}
+
+.therapist-editor-primary-button:disabled,
+.therapist-editor-submit-button:disabled {
+    cursor: wait;
+    opacity: 0.55;
+}
+
+.therapist-blog-editor-message,
+.therapist-blog-editor-feedback,
+.therapist-blog-editor-locked {
+    width: min(100%, 1180px);
+    box-sizing: border-box;
+    margin: 0 auto 1.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+}
+
+.therapist-blog-editor-success {
+    background: #dce8d8;
+    color: #36533a;
+}
+
+.therapist-blog-editor-error {
+    background: #efd2d2;
+    color: #793636;
+}
+
+.therapist-blog-editor-feedback {
+    background: #f1dfb9;
+    color: #604b1c;
+}
+
+.therapist-blog-editor-feedback h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+.therapist-blog-editor-feedback p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.therapist-blog-editor-locked {
+    background: #dce7ef;
+    color: #34536a;
+}
+
+.therapist-blog-editor-status {
+    min-height: 60vh;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .therapist-blog-editor-page {
+        padding: 4rem 6%;
+    }
+
+    .therapist-blog-editor-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .therapist-blog-editor-form {
+        grid-template-columns: 1fr;
+    }
+}

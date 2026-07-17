@@ -2,7 +2,7 @@ POST http://localhost:8080/api/message/conversations/2145be0f-7635-4400-af30-8f0
 Content-Type: application/json
 
 {
-  "ciphertext": "testing the updated messages fields",
+  "ciphertext": "hello user",
   "encryptionAlgorithm": "PLAINTEXT_DEV",
   "iv": "dev-placeholder",
   "authTag": null
