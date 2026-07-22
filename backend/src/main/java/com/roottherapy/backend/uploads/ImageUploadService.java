@@ -22,7 +22,8 @@ public class ImageUploadService {
     private static final Set<String> ALLOWED_CATEGORIES = Set.of(
             "services",
             "therapists",
-            "blog"
+            "blog",
+            "gallery"
     );
 
     private static final Set<String> ALLOWED_CONTENT_TYPES = Set.of(

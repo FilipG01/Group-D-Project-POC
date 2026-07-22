@@ -82,6 +82,28 @@ function AdminDashboard() {
                         Manage Blog →
                     </Link>
                 </article>
+                <article className="admin-dashboard-card">
+                    <div>
+                        <p className="admin-dashboard-card-label">
+                            Public content
+                        </p>
+
+                        <h2>Gallery</h2>
+
+                        <p>
+                            Add, edit, show, hide, archive and
+                            reorder the gallery images displayed
+                            on the Home and About pages.
+                        </p>
+                    </div>
+
+                    <Link
+                        to="/admin/gallery"
+                        className="admin-dashboard-link"
+                    >
+                        Manage Gallery →
+                    </Link>
+                </article>
             </section>
         </main>
     );

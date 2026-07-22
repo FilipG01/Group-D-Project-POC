@@ -141,6 +141,40 @@
     outline: 3px solid #8f9773;
 }
 
+.gallery-caption {
+    max-width: 800px;
+    margin: 1.5rem auto 0;
+    color: #4f5d50;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.gallery-state-message {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 3rem;
+    color: #4f5d50;
+    text-align: center;
+}
+
+.gallery-state-message button {
+    min-height: 44px;
+    margin-top: 1rem;
+    padding: 0 1.15rem;
+    border: none;
+    border-radius: 999px;
+    background: #4f5d50;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+
+.gallery-arrow:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
 @media(max-width:900px){
 
     .gallery-main{

@@ -30,6 +30,9 @@ import AdminBlogPosts from "./pages/admin/AdminBlogPosts.jsx";
 import AdminBlogReview from "./pages/admin/AdminBlogReview.jsx";
 import AdminBlogEditor from "./pages/admin/AdminBlogEditor.jsx";
 import AdminBlogReorder from "./pages/admin/AdminBlogReorder.jsx";
+import AdminGallery from "./pages/admin/AdminGallery.jsx";
+import AdminGalleryCreate from "./pages/admin/AdminGalleryCreate.jsx";
+import AdminGalleryEdit from "./pages/admin/AdminGalleryEdit.jsx";
 
 import TherapistDashboard from "./pages/therapist/TherapistDashboard.jsx";
 import TherapistProfileEdit from "./pages/therapist/TherapistProfileEdit.jsx";
@@ -163,6 +166,32 @@ function App() {
                     element={
                         <ProtectedRoute allowedRoles={["ADMIN"]}>
                             <AdminBlogEditor />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/gallery"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminGallery />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/admin/gallery/new"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminGalleryCreate />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/admin/gallery/:imageId/edit"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminGalleryEdit />
                         </ProtectedRoute>
                     }
                 />

@@ -57,6 +57,8 @@ public class SecurityConfig {
                                 "/api/therapists/public/**",
                                 "/api/blog",
                                 "/api/blog/**",
+                                "/api/gallery",
+                                "/api/gallery/**",
                                 "/uploads/**"
                         ).permitAll()
 
@@ -79,7 +81,9 @@ public class SecurityConfig {
                                 "/api/admin/blog",
                                 "/api/admin/blog/**",
                                 "/api/admin/therapists",
-                                "/api/admin/therapists/**"
+                                "/api/admin/therapists/**",
+                                "/api/admin/gallery",
+                                "/api/admin/gallery/**"
                         ).hasRole("ADMIN")
 
                         // Everything else requires authentication

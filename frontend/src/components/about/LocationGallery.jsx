@@ -1,38 +1,93 @@
-import { useState } from "react";
+import {
+    useEffect,
+    useState,
+} from "react";
+
 import {
     FaChevronLeft,
     FaChevronRight,
 } from "react-icons/fa";
 
-import {
-    locationGallery,
-} from "../../data/locationGalleryData.js";
+import usePublicGallery from "../../hooks/gallery/usePublicGallery.js";
+import { getImageUrl } from "../../utils/imageUrl.js";
 
 import "../../styles/about/locationGallery.css";
 
 function LocationGallery() {
+    const {
+        images,
+        isLoading,
+        error,
+        loadImages,
+    } = usePublicGallery();
+
     const [currentImage, setCurrentImage] =
         useState(0);
 
-    const currentGalleryImage =
-        locationGallery[currentImage];
+    /*
+     * Return to the first image whenever the backend list changes.
+     * This prevents an invalid array index after images are hidden.
+     */
+    useEffect(() => {
+        setCurrentImage(0);
+    }, [images]);
 
     function previousImage() {
         setCurrentImage((current) =>
             current === 0
-                ? locationGallery.length - 1
+                ? images.length - 1
                 : current - 1
         );
     }
 
     function nextImage() {
         setCurrentImage((current) =>
-            current ===
-            locationGallery.length - 1
+            current === images.length - 1
                 ? 0
                 : current + 1
         );
     }
+
+    if (isLoading) {
+        return (
+            <section className="location-gallery">
+                <p className="gallery-state-message">
+                    Loading gallery...
+                </p>
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section className="location-gallery">
+                <div className="gallery-state-message">
+                    <p>{error}</p>
+
+                    <button
+                        type="button"
+                        onClick={loadImages}
+                    >
+                        Try again
+                    </button>
+                </div>
+            </section>
+        );
+    }
+
+    /*
+     * Do not render a broken carousel when no visible images exist.
+     */
+    if (images.length === 0) {
+        return null;
+    }
+
+    const currentGalleryImage =
+        images[currentImage];
+
+    const currentImageUrl = getImageUrl(
+        currentGalleryImage.imageUrl
+    );
 
     return (
         <section className="location-gallery">
@@ -52,16 +107,15 @@ function LocationGallery() {
                     className="gallery-arrow"
                     onClick={previousImage}
                     aria-label="Show previous image"
+                    disabled={images.length === 1}
                 >
-                    <FaChevronLeft
-                        aria-hidden="true"
-                    />
+                    <FaChevronLeft aria-hidden="true" />
                 </button>
 
                 <div className="gallery-image-frame">
                     <img
-                        src={currentGalleryImage.image}
-                        alt={currentGalleryImage.alt}
+                        src={currentImageUrl}
+                        alt={currentGalleryImage.altText}
                         className="gallery-feature-image"
                     />
                 </div>
@@ -71,73 +125,80 @@ function LocationGallery() {
                     className="gallery-arrow"
                     onClick={nextImage}
                     aria-label="Show next image"
+                    disabled={images.length === 1}
                 >
-                    <FaChevronRight
-                        aria-hidden="true"
-                    />
+                    <FaChevronRight aria-hidden="true" />
                 </button>
             </div>
 
-            <div
-                className="gallery-dots"
-                aria-label="Choose gallery image"
-            >
-                {locationGallery.map(
-                    (image, index) => (
-                        <button
-                            key={image.id}
-                            type="button"
-                            className={
-                                index === currentImage
-                                    ? "gallery-dot active"
-                                    : "gallery-dot"
-                            }
-                            onClick={() =>
-                                setCurrentImage(index)
-                            }
-                            aria-label={`Show image ${
-                                index + 1
-                            }`}
-                            aria-current={
-                                index === currentImage
-                                    ? "true"
-                                    : undefined
-                            }
-                        />
-                    )
-                )}
-            </div>
+            {currentGalleryImage.caption && (
+                <p className="gallery-caption">
+                    {currentGalleryImage.caption}
+                </p>
+            )}
 
-            <div className="gallery-thumbnails">
-                {locationGallery.map(
-                    (image, index) => (
-                        <button
-                            key={image.id}
-                            type="button"
-                            className="gallery-thumbnail-button"
-                            onClick={() =>
-                                setCurrentImage(index)
-                            }
-                            aria-label={`Show ${image.alt}`}
-                            aria-current={
-                                index === currentImage
-                                    ? "true"
-                                    : undefined
-                            }
-                        >
-                            <img
-                                src={image.image}
-                                alt=""
+            {images.length > 1 && (
+                <>
+                    <div
+                        className="gallery-dots"
+                        aria-label="Choose gallery image"
+                    >
+                        {images.map((image, index) => (
+                            <button
+                                key={image.id}
+                                type="button"
                                 className={
                                     index === currentImage
-                                        ? "gallery-thumbnail active"
-                                        : "gallery-thumbnail"
+                                        ? "gallery-dot active"
+                                        : "gallery-dot"
+                                }
+                                onClick={() =>
+                                    setCurrentImage(index)
+                                }
+                                aria-label={`Show image ${
+                                    index + 1
+                                }`}
+                                aria-current={
+                                    index === currentImage
+                                        ? "true"
+                                        : undefined
                                 }
                             />
-                        </button>
-                    )
-                )}
-            </div>
+                        ))}
+                    </div>
+
+                    <div className="gallery-thumbnails">
+                        {images.map((image, index) => (
+                            <button
+                                key={image.id}
+                                type="button"
+                                className="gallery-thumbnail-button"
+                                onClick={() =>
+                                    setCurrentImage(index)
+                                }
+                                aria-label={`Show ${image.altText}`}
+                                aria-current={
+                                    index === currentImage
+                                        ? "true"
+                                        : undefined
+                                }
+                            >
+                                <img
+                                    src={getImageUrl(
+                                        image.imageUrl
+                                    )}
+                                    alt=""
+                                    className={
+                                        index === currentImage
+                                            ? "gallery-thumbnail active"
+                                            : "gallery-thumbnail"
+                                    }
+                                />
+                            </button>
+                        ))}
+                    </div>
+                </>
+            )}
         </section>
     );
 }

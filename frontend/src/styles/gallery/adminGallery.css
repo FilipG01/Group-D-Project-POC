@@ -1,0 +1,75 @@
+/*
+ * This file only adds gallery-specific image layout.
+ */
+
+.admin-gallery-summary {
+    display: grid;
+    grid-template-columns: 180px 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.admin-gallery-preview {
+    width: 180px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f8f5ef;
+    border-radius: 1rem;
+}
+
+.admin-gallery-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-gallery-preview span {
+    color: #776d59;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.admin-gallery-details h2 {
+    margin: 0.35rem 0 0.75rem;
+    color: #4f5d50;
+}
+
+.admin-gallery-details p {
+    margin: 0;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 850px) {
+    .admin-gallery-summary {
+        grid-template-columns: 140px 1fr;
+    }
+
+    .admin-gallery-preview {
+        width: 140px;
+        height: 110px;
+    }
+
+    .admin-gallery-summary .admin-service-statuses {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-gallery-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-gallery-preview {
+        width: 100%;
+        height: 220px;
+    }
+
+    .admin-gallery-summary .admin-service-statuses {
+        grid-column: auto;
+    }
+}
