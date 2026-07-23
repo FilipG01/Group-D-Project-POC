@@ -63,6 +63,17 @@ function AdminDashboard() {
 
                 <article className="admin-dashboard-card">
                     <div>
+                        <p className="admin-dashboard-card-label">Moderation</p>
+                        <h2>Profile Submissions</h2>
+                        <p>Compare therapist profile drafts with the approved live profile, then approve, reject or request changes.</p>
+                    </div>
+                    <Link to="/admin/therapist-submissions" className="admin-dashboard-link">
+                        Review Profile Changes →
+                    </Link>
+                </article>
+
+                <article className="admin-dashboard-card">
+                    <div>
                         <p className="admin-dashboard-card-label">
                             Content
                         </p>

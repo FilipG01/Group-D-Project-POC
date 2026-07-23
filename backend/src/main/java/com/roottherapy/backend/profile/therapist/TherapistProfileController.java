@@ -1,7 +1,6 @@
 package com.roottherapy.backend.profile.therapist;
 
 import com.roottherapy.backend.profile.therapist.dto.AdminTherapistProfileResponse;
-import com.roottherapy.backend.profile.therapist.dto.UpdateOwnTherapistProfileRequest;
 import com.roottherapy.backend.security.CustomUserDetails;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -27,17 +26,6 @@ public class TherapistProfileController {
     ) {
         return managementService.getOwnProfile(
                 getAuthenticatedUserId(authentication)
-        );
-    }
-
-    @PutMapping("/me")
-    public AdminTherapistProfileResponse updateMyProfile(
-            Authentication authentication,
-            @Valid @RequestBody UpdateOwnTherapistProfileRequest request
-    ) {
-        return managementService.updateOwnProfile(
-                getAuthenticatedUserId(authentication),
-                request
         );
     }
 
