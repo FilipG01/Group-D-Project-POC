@@ -1,0 +1,122 @@
+.submission-status-filter {
+    min-width: 220px;
+    padding: .8rem 1rem;
+    border: 1px solid #c9c9c9;
+    border-radius: 8px;
+    background: white;
+}
+
+.profile-review-page {
+    width: min(1180px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 3rem 0 5rem;
+}
+
+.profile-review-header {
+    margin-bottom: 2rem;
+}
+
+.profile-image-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.profile-image-comparison > div {
+    padding: 1.5rem;
+    border: 1px solid #dedede;
+    border-radius: 12px;
+    background: white;
+}
+
+.profile-image-comparison img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.profile-comparison-table {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr;
+    border: 1px solid #dedede;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+}
+
+.comparison-heading {
+    padding: 1rem; font-weight: 700; background: #f4f2ec; border-bottom: 1px solid #dedede; }
+
+.comparison-row {
+    display: contents; }
+
+.comparison-row > * {
+    padding: 1rem;
+    border-bottom: 1px solid #ececec;
+    white-space: pre-wrap;
+}
+
+.proposed-value.changed {
+    background: #fff6d8;
+    font-weight: 600;
+}
+
+.profile-review-actions {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #dedede;
+    border-radius: 12px;
+    background: white;
+}
+
+.profile-review-actions label {
+    display: grid;
+    gap: .5rem;
+}
+
+.profile-review-actions textarea {
+    width: 100%;
+    padding: .8rem;
+}
+
+.profile-review-buttons, .therapist-profile-submit-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.therapist-profile-review-note, .therapist-profile-pending-panel {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #d8c98d;
+    border-radius: 10px;
+    background: #fff9df;
+}
+
+.danger {
+    border-color: #a53737;
+    color: #8c2424;
+}
+
+@media (max-width: 760px) {
+
+    .profile-comparison-table { grid-template-columns: 1fr;
+    }
+
+    .comparison-heading { display: none;
+    }
+
+    .comparison-row {
+        display: grid;
+    }
+
+    .profile-image-comparison {
+        grid-template-columns: 1fr;
+    }
+
+}

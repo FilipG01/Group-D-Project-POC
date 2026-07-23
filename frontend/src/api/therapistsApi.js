@@ -193,3 +193,82 @@ export async function uploadTherapistImage(file) {
 
     return handleResponse(response);
 }
+/*
+ * Moderated therapist profile drafts
+ */
+
+export async function getOwnTherapistProfileDraft() {
+    const response = await fetch(
+        `${API_BASE_URL}/api/therapist-profile/me/draft`,
+        { method: "GET", credentials: "include" }
+    );
+    return handleResponse(response);
+}
+
+export async function saveOwnTherapistProfileDraft(profileData, version) {
+    const response = await fetch(
+        `${API_BASE_URL}/api/therapist-profile/me/draft`,
+        {
+            method: "PUT",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...profileData, version }),
+        }
+    );
+    return handleResponse(response);
+}
+
+export async function submitOwnTherapistProfileDraft(version) {
+    const response = await fetch(
+        `${API_BASE_URL}/api/therapist-profile/me/draft/submit`,
+        {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ version }),
+        }
+    );
+    return handleResponse(response);
+}
+
+export async function getAdminTherapistProfileSubmissions(status = "SUBMITTED") {
+    const query = status ? `?status=${encodeURIComponent(status)}` : "";
+    const response = await fetch(
+        `${API_BASE_URL}/api/admin/therapist-profile-submissions${query}`,
+        { method: "GET", credentials: "include" }
+    );
+    return handleResponse(response);
+}
+
+export async function getAdminTherapistProfileSubmission(submissionId) {
+    const response = await fetch(
+        `${API_BASE_URL}/api/admin/therapist-profile-submissions/${submissionId}`,
+        { method: "GET", credentials: "include" }
+    );
+    return handleResponse(response);
+}
+
+async function reviewTherapistProfileSubmission(submissionId, action, payload) {
+    const response = await fetch(
+        `${API_BASE_URL}/api/admin/therapist-profile-submissions/${submissionId}/${action}`,
+        {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        }
+    );
+    return handleResponse(response);
+}
+
+export function approveTherapistProfileSubmission(submissionId, version, note = "") {
+    return reviewTherapistProfileSubmission(submissionId, "approve", { version, note });
+}
+
+export function requestTherapistProfileChanges(submissionId, version, note) {
+    return reviewTherapistProfileSubmission(submissionId, "request-changes", { version, note });
+}
+
+export function rejectTherapistProfileSubmission(submissionId, version, note) {
+    return reviewTherapistProfileSubmission(submissionId, "reject", { version, note });
+}

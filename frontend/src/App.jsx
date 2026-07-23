@@ -24,6 +24,8 @@ import AdminServiceCreate from "./pages/admin/AdminServiceCreate.jsx";
 import AdminServiceEdit from "./pages/admin/AdminServiceEdit.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import AdminTherapists from "./pages/admin/AdminTherapists.jsx";
+import AdminTherapistSubmissions from "./pages/admin/AdminTherapistSubmissions.jsx";
+import AdminTherapistSubmissionReview from "./pages/admin/AdminTherapistSubmissionReview.jsx";
 import AdminCreateTherapist from "./pages/admin/AdminCreateTherapist.jsx";
 import AdminEditTherapist from "./pages/admin/AdminEditTherapist.jsx";
 import AdminBlogPosts from "./pages/admin/AdminBlogPosts.jsx";
@@ -107,6 +109,22 @@ function App() {
                     element={
                         <ProtectedRoute allowedRoles={["ADMIN"]}>
                             <AdminTherapists />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/therapist-submissions"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminTherapistSubmissions />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/therapist-submissions/:submissionId"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminTherapistSubmissionReview />
                         </ProtectedRoute>
                     }
                 />

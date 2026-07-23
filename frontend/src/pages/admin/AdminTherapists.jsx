@@ -110,12 +110,14 @@ function AdminTherapists() {
                     </p>
                 </div>
 
-                <Link
-                    to="/admin/therapists/new"
-                    className="admin-primary-button"
-                >
-                    Add Therapist
-                </Link>
+                <div className="admin-therapist-header-actions">
+                    <Link to="/admin/therapist-submissions" className="admin-secondary-button">
+                        Review Profile Submissions
+                    </Link>
+                    <Link to="/admin/therapists/new" className="admin-primary-button">
+                        Add Therapist
+                    </Link>
+                </div>
             </header>
 
             {error && (

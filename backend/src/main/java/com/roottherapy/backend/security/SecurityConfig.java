@@ -82,6 +82,8 @@ public class SecurityConfig {
                                 "/api/admin/blog/**",
                                 "/api/admin/therapists",
                                 "/api/admin/therapists/**",
+                                "/api/admin/therapist-profile-submissions",
+                                "/api/admin/therapist-profile-submissions/**",
                                 "/api/admin/gallery",
                                 "/api/admin/gallery/**"
                         ).hasRole("ADMIN")
