@@ -8,6 +8,7 @@ import com.roottherapy.backend.users.User;
 import com.roottherapy.backend.users.UserRepository;
 import com.roottherapy.backend.users.UserRole;
 import com.roottherapy.backend.users.AccountStatus;
+import com.roottherapy.backend.notification.ModerationCommunicationService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -49,15 +50,18 @@ public class TherapistBlogService {
     private final BlogPostRepository blogPostRepository;
     private final UserRepository userRepository;
     private final BlogSlugService blogSlugService;
+    private final ModerationCommunicationService communicationService;
 
     public TherapistBlogService(
             BlogPostRepository blogPostRepository,
             UserRepository userRepository,
-            BlogSlugService blogSlugService
+            BlogSlugService blogSlugService,
+            ModerationCommunicationService communicationService
     ) {
         this.blogPostRepository = blogPostRepository;
         this.userRepository = userRepository;
         this.blogSlugService = blogSlugService;
+        this.communicationService = communicationService;
     }
 
     @Transactional
@@ -246,6 +250,13 @@ public class TherapistBlogService {
                         therapist,
                         null
                 );
+
+        // Create an in-app alert and email each active administrator.
+        communicationService.notifyAdminsOfBlogSubmission(
+                therapist,
+                savedPost.getId(),
+                savedPost.getTitle()
+        );
 
         return TherapistBlogPostResponse.fromEntity(
                 savedPost

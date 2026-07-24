@@ -88,6 +88,12 @@ public class SecurityConfig {
                                 "/api/admin/gallery/**"
                         ).hasRole("ADMIN")
 
+                        // Notifications are private to the signed-in user.
+                        .requestMatchers(
+                                "/api/notifications",
+                                "/api/notifications/**"
+                        ).authenticated()
+
                         // Everything else requires authentication
                         .anyRequest().authenticated()
                 ).build();

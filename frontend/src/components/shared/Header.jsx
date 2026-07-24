@@ -4,6 +4,7 @@ import { Avatar, Menu } from "@mantine/core";
 import { useAuth } from "../../auth/useAuth.js";
 import { getOwnTherapistProfile } from "../../api/therapistsApi.js";
 import { getImageUrl } from "../../utils/imageUrl.js";
+import NotificationBell from "../notifications/NotificationBell.jsx";
 import '../../styles/shared/header.css'
 
 function Header() {
@@ -87,7 +88,9 @@ function Header() {
 
                 <div className="button-container">
                     <Link to="/contact" className="booking-button">Book a Session</Link>
-                    
+
+                    {user && <NotificationBell />}
+
                     <Menu position="bottom-end" offset={8} shadow="md" width={120}>
                         <Menu.Target>
                             <Avatar component="button" type="button"

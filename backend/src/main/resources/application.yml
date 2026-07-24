@@ -52,3 +52,4 @@ app:
   uploads:
     directory: ${UPLOAD_DIRECTORY:backend/uploads}
     max-file-size: 5MB
+

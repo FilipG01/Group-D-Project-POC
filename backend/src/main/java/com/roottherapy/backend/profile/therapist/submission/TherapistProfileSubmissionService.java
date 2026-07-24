@@ -8,6 +8,7 @@ import com.roottherapy.backend.users.AccountStatus;
 import com.roottherapy.backend.users.User;
 import com.roottherapy.backend.users.UserRepository;
 import com.roottherapy.backend.users.UserRole;
+import com.roottherapy.backend.notification.ModerationCommunicationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,15 +39,18 @@ public class TherapistProfileSubmissionService {
     private final TherapistProfileSubmissionRepository submissionRepository;
     private final TherapistProfileRepository profileRepository;
     private final UserRepository userRepository;
+    private final ModerationCommunicationService communicationService;
 
     public TherapistProfileSubmissionService(
             TherapistProfileSubmissionRepository submissionRepository,
             TherapistProfileRepository profileRepository,
-            UserRepository userRepository
+            UserRepository userRepository,
+            ModerationCommunicationService communicationService
     ) {
         this.submissionRepository = submissionRepository;
         this.profileRepository = profileRepository;
         this.userRepository = userRepository;
+        this.communicationService = communicationService;
     }
 
     @Transactional
@@ -92,7 +96,7 @@ public class TherapistProfileSubmissionService {
             UUID therapistUserId,
             SubmitTherapistProfileDraftRequest request
     ) {
-        getActiveUserWithRole(therapistUserId, UserRole.THERAPIST);
+        User therapist = getActiveUserWithRole(therapistUserId, UserRole.THERAPIST);
         TherapistProfileSubmission draft = getActiveSubmission(therapistUserId);
         validateEditable(draft);
         validateVersion(draft, request.version());
@@ -104,7 +108,12 @@ public class TherapistProfileSubmissionService {
         draft.setReviewedBy(null);
         draft.setReviewedAt(null);
 
-        return TherapistProfileSubmissionResponse.fromEntity(submissionRepository.saveAndFlush(draft));
+        TherapistProfileSubmission saved = submissionRepository.saveAndFlush(draft);
+
+        // Alert every active administrator that a profile is ready for review.
+        communicationService.notifyAdminsOfProfileSubmission(therapist, saved.getId());
+
+        return TherapistProfileSubmissionResponse.fromEntity(saved);
     }
 
     @Transactional(readOnly = true)
@@ -147,6 +156,13 @@ public class TherapistProfileSubmissionService {
         submission.setApprovedAt(now);
         TherapistProfileSubmission saved = submissionRepository.saveAndFlush(submission);
 
+        communicationService.notifyTherapistOfProfileDecision(
+                saved.getTherapist(),
+                saved.getId(),
+                "APPROVED",
+                saved.getReviewNotes()
+        );
+
         return toAdminResponse(saved);
     }
 
@@ -187,7 +203,18 @@ public class TherapistProfileSubmissionService {
         submission.setReviewedBy(admin);
         submission.setReviewedAt(Instant.now());
 
-        return toAdminResponse(submissionRepository.saveAndFlush(submission));
+        TherapistProfileSubmission saved = submissionRepository.saveAndFlush(submission);
+
+        if (newStatus == TherapistProfileSubmissionStatus.REJECTED) {
+            communicationService.notifyTherapistOfProfileDecision(
+                    saved.getTherapist(),
+                    saved.getId(),
+                    "REJECTED",
+                    saved.getReviewNotes()
+            );
+        }
+
+        return toAdminResponse(saved);
     }
 
     private AdminTherapistProfileSubmissionResponse toAdminResponse(TherapistProfileSubmission submission) {

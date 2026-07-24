@@ -13,6 +13,7 @@ import com.roottherapy.backend.users.AccountStatus;
 import com.roottherapy.backend.users.User;
 import com.roottherapy.backend.users.UserRepository;
 import com.roottherapy.backend.users.UserRole;
+import com.roottherapy.backend.notification.ModerationCommunicationService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -60,11 +61,13 @@ public class AdminBlogService {
     private final UserRepository userRepository;
 
     private final BlogSlugService blogSlugService;
+    private final ModerationCommunicationService communicationService;
 
     public AdminBlogService(
             BlogPostRepository blogPostRepository,
             UserRepository userRepository,
-            BlogSlugService blogSlugService
+            BlogSlugService blogSlugService,
+            ModerationCommunicationService communicationService
     ) {
         this.blogPostRepository =
                 blogPostRepository;
@@ -74,6 +77,9 @@ public class AdminBlogService {
 
         this.blogSlugService =
                 blogSlugService;
+
+        this.communicationService =
+                communicationService;
     }
 
     @Transactional(readOnly = true)
@@ -171,6 +177,15 @@ public class AdminBlogService {
                 null
         );
 
+        // The author receives both an in-app notification and an email.
+        communicationService.notifyTherapistOfBlogDecision(
+                savedPost.getAuthor(),
+                savedPost.getId(),
+                savedPost.getTitle(),
+                "APPROVED",
+                null
+        );
+
         return AdminBlogPostResponse.fromEntity(
                 savedPost
         );
@@ -257,6 +272,14 @@ public class AdminBlogService {
                 previousStatus,
                 BlogPostStatus.REJECTED,
                 admin,
+                note
+        );
+
+        communicationService.notifyTherapistOfBlogDecision(
+                savedPost.getAuthor(),
+                savedPost.getId(),
+                savedPost.getTitle(),
+                "REJECTED",
                 note
         );
 

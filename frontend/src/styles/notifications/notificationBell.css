@@ -1,0 +1,116 @@
+.notification-bell-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.notification-bell-button:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.notification-bell-icon {
+    font-size: 21px;
+    line-height: 1;
+}
+
+.notification-bell-count {
+    position: absolute;
+    top: -5px;
+    right: -7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border: 2px solid #5A645B;
+    border-radius: 999px;
+    background-color: #B44A4A;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.notification-menu {
+    padding: 0;
+    overflow: hidden;
+}
+
+.notification-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid #E4DED5;
+    background-color: #F7F3ED;
+    color: #3F4941;
+}
+
+.notification-menu-header span {
+    font-size: 13px;
+}
+
+.notification-menu-list {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.notification-menu-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 14px 16px;
+    border: 0;
+    border-bottom: 1px solid #EEE8E0;
+    background-color: #FFFFFF;
+    text-align: left;
+    cursor: pointer;
+}
+
+.notification-menu-item:hover {
+    background-color: #F7F3ED;
+}
+
+.notification-menu-item.is-unread {
+    border-left: 4px solid #8D6E52;
+    background-color: #FBF6EE;
+}
+
+.notification-menu-item.is-read {
+    opacity: 0.75;
+}
+
+.notification-menu-item-title {
+    margin-bottom: 4px;
+    color: #3F4941;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.notification-menu-item-message {
+    color: #616A62;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.notification-menu-item-date {
+    margin-top: 7px;
+    color: #8B918B;
+    font-size: 11px;
+}
+
+.notification-menu-empty {
+    margin: 0;
+    padding: 24px 16px;
+    color: #6C746D;
+    text-align: center;
+}
