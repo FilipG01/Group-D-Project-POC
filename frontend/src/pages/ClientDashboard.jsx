@@ -74,7 +74,8 @@ function ClientDashboard() {
     function renderDashboardSection(){
         return(
             <>
-            <h2>main dashboard</h2>
+            
+            <h1 className="dashboard-title">Main Dashboard</h1>
             <TherapistDirectory
             therapists={therapists}
             loadingTherapists={loadingTherapists}
