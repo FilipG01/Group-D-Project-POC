@@ -22,7 +22,7 @@ public record AppointmentResponse(
         String clientNotes,
         String meetingLink,
         String cancellationReason,
-        Instant canceledAt,
+        Instant cancelledAt,
         Instant createdAt,
         Instant updatedAt
 ) {

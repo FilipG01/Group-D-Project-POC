@@ -1,7 +1,6 @@
 package com.roottherapy.backend.appointments;
 
 import com.roottherapy.backend.users.User;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
