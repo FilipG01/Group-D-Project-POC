@@ -273,6 +273,12 @@ function AdminBlogPosts() {
         <main className="admin-blog-page">
             <header className="admin-blog-header">
                 <div>
+                    <Link
+                        to="/admin"
+                        className="admin-back-link"
+                    >
+                        ← Back to Admin Dashboard
+                    </Link>
                     <p className="section-label">
                         Admin dashboard
                     </p>
@@ -287,12 +293,6 @@ function AdminBlogPosts() {
                 </div>
 
                 <div className="admin-blog-header-actions">
-                    <Link
-                        to="/admin"
-                        className="admin-blog-secondary-button"
-                    >
-                        ← Dashboard
-                    </Link>
                     <Link
                         to="/admin/blog/new"
                         className="admin-blog-primary-button"

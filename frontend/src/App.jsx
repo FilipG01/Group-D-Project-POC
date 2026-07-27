@@ -34,6 +34,8 @@ import AdminBlogReorder from "./pages/admin/AdminBlogReorder.jsx";
 import AdminGallery from "./pages/admin/AdminGallery.jsx";
 import AdminGalleryCreate from "./pages/admin/AdminGalleryCreate.jsx";
 import AdminGalleryEdit from "./pages/admin/AdminGalleryEdit.jsx";
+import AdminTherapistSubmissions from "./pages/admin/AdminTherapistSubmissions.jsx";
+import AdminTherapistSubmissionReview from "./pages/admin/AdminTherapistSubmissionReview.jsx";
 
 import TherapistDashboard from "./pages/therapist/TherapistDashboard.jsx";
 import TherapistProfileEdit from "./pages/therapist/TherapistProfileEdit.jsx";
@@ -132,6 +134,23 @@ function App() {
                     element={
                         <ProtectedRoute allowedRoles={["ADMIN"]}>
                             <AdminEditTherapist />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/therapist-submissions"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminTherapistSubmissions />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/admin/therapist-submissions/:submissionId"
+                    element={
+                        <ProtectedRoute allowedRoles={["ADMIN"]}>
+                            <AdminTherapistSubmissionReview />
                         </ProtectedRoute>
                     }
                 />
