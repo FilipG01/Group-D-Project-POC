@@ -16,6 +16,7 @@ import Terms from "./pages/Terms.jsx";
 
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import ChangePassword from "./pages/ChangePassword.jsx";
 import ClientDashboard from "./pages/ClientDashboard.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 
@@ -24,8 +25,6 @@ import AdminServiceCreate from "./pages/admin/AdminServiceCreate.jsx";
 import AdminServiceEdit from "./pages/admin/AdminServiceEdit.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import AdminTherapists from "./pages/admin/AdminTherapists.jsx";
-import AdminTherapistSubmissions from "./pages/admin/AdminTherapistSubmissions.jsx";
-import AdminTherapistSubmissionReview from "./pages/admin/AdminTherapistSubmissionReview.jsx";
 import AdminCreateTherapist from "./pages/admin/AdminCreateTherapist.jsx";
 import AdminEditTherapist from "./pages/admin/AdminEditTherapist.jsx";
 import AdminBlogPosts from "./pages/admin/AdminBlogPosts.jsx";
@@ -64,6 +63,14 @@ function App() {
                 <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route
+                    path="/account/password"
+                    element={
+                        <ProtectedRoute allowedRoles={["CLIENT", "THERAPIST", "ADMIN"]}>
+                            <ChangePassword />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/dashboard" element={
@@ -109,22 +116,6 @@ function App() {
                     element={
                         <ProtectedRoute allowedRoles={["ADMIN"]}>
                             <AdminTherapists />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="/admin/therapist-submissions"
-                    element={
-                        <ProtectedRoute allowedRoles={["ADMIN"]}>
-                            <AdminTherapistSubmissions />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="/admin/therapist-submissions/:submissionId"
-                    element={
-                        <ProtectedRoute allowedRoles={["ADMIN"]}>
-                            <AdminTherapistSubmissionReview />
                         </ProtectedRoute>
                     }
                 />

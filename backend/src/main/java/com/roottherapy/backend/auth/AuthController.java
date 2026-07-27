@@ -3,6 +3,7 @@ package com.roottherapy.backend.auth;
 
 import com.roottherapy.backend.auth.dto.LoginRequest;
 import com.roottherapy.backend.auth.dto.RegisterClientRequest;
+import com.roottherapy.backend.auth.dto.ChangePasswordRequest;
 import com.roottherapy.backend.security.CustomUserDetails;
 import com.roottherapy.backend.users.dto.UserResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,5 +45,15 @@ public class AuthController {
     public UserResponse me(Authentication auth){
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         return UserResponse.from(userDetails.getUser());
+    }
+
+    @PutMapping("/password")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void changePassword(
+            @Valid @RequestBody ChangePasswordRequest request,
+            Authentication auth
+    ) {
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        authService.changePassword(userDetails.getUser(), request);
     }
 }
