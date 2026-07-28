@@ -79,6 +79,28 @@ function TherapistDashboard() {
                         Open Chat
                     </Link>
                 </article>
+
+                 <article className="therapist-dashboard-card">
+                    <div>
+                        <p className="therapist-dashboard-card-label">
+                            Appointments
+                        </p>
+
+                        <h2>Requested Sessions</h2>
+
+                        <p>
+                            View appointment requests from clients and keep track
+                            of upcoming booked sessions.
+                        </p>
+                    </div>
+
+                    <Link
+                        to="/therapist/appointments"
+                        className="therapist-dashboard-link"
+                    >
+                        View Appointments
+                    </Link>
+                </article>
             </section>
         </main>
     );

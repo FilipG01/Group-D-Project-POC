@@ -1,0 +1,145 @@
+.therapist-appointments-page {
+      min-height: 100vh;
+      padding: 6rem 8%;
+      background: #f5f0e6;
+      color: #2f352f;
+  }
+
+  .therapist-appointments-header,
+  .therapist-appointments-list,
+  .therapist-appointments-empty,
+  .therapist-appointments-status {
+      width: min(100%, 1100px);
+      margin-inline: auto;
+  }
+
+  .therapist-appointments-back {
+      display: inline-flex;
+      margin-bottom: 1.5rem;
+      color: #4f5d50;
+      font-weight: 700;
+      text-decoration: none;
+  }
+
+  .therapist-appointments-header h1 {
+      margin: 0.5rem 0 1rem;
+      color: #4f5d50;
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      font-weight: 500;
+  }
+
+  .therapist-appointments-header p:last-child {
+      max-width: 720px;
+      line-height: 1.7;
+  }
+
+  .therapist-appointments-list {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+  }
+
+  .therapist-appointment-card,
+  .therapist-appointments-empty,
+  .therapist-appointments-status {
+      padding: 2rem;
+      border: 1px solid rgba(79, 93, 80, 0.18);
+      border-radius: 1.5rem;
+      background: #e3d7c1;
+      box-shadow: 0 16px 38px rgba(47, 53, 47, 0.08);
+  }
+
+  .therapist-appointment-card-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+  }
+
+  .therapist-appointment-label {
+      margin: 0 0 0.5rem;
+      color: #8a7448;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+  }
+
+  .therapist-appointment-card h2 {
+      margin: 0;
+      color: #4f5d50;
+      font-size: 1.8rem;
+      font-weight: 500;
+  }
+
+  .therapist-appointment-status {
+      height: fit-content;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: #fffaf1;
+      color: #4f5d50;
+      font-size: 0.8rem;
+      font-weight: 800;
+  }
+
+  .therapist-appointment-status--requested {
+      background: #ddc4ad;
+      color: #4b564c;
+  }
+
+  .therapist-appointment-details {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 0;
+  }
+
+  .therapist-appointment-details div {
+      padding: 1rem;
+      border-radius: 1rem;
+      background: rgba(255, 250, 241, 0.72);
+  }
+
+  .therapist-appointment-details dt {
+      margin-bottom: 0.35rem;
+      color: #737970;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+  }
+
+  .therapist-appointment-details dd {
+      margin: 0;
+      color: #2f352f;
+      font-weight: 700;
+  }
+
+  .therapist-appointment-notes {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      background: rgba(255, 250, 241, 0.72);
+  }
+
+  .therapist-appointment-notes p:last-child {
+      margin: 0;
+      line-height: 1.7;
+  }
+
+  .therapist-appointments-error {
+      background: #f6dddd;
+      color: #7a2d2d;
+  }
+
+  @media (max-width: 760px) {
+      .therapist-appointments-page {
+          padding: 4rem 6%;
+      }
+
+      .therapist-appointment-card-main {
+          flex-direction: column;
+      }
+
+      .therapist-appointment-details {
+          grid-template-columns: 1fr;
+      }
+  }

@@ -40,6 +40,7 @@ import TherapistProfileEdit from "./pages/therapist/TherapistProfileEdit.jsx";
 import TherapistChat from "./pages/therapist/TherapistChat.jsx";
 import TherapistBlogPosts from "./pages/therapist/TherapistBlogPosts.jsx";
 import TherapistBlogEditor from "./pages/therapist/TherapistBlogEditor.jsx";
+import TherapistAppointments from "./pages/therapist/TherapistAppointments.jsx";
 
 import NotFound from "./pages/errors/NotFound.jsx";
 
@@ -251,6 +252,14 @@ function App() {
                     element={
                         <ProtectedRoute allowedRoles={["THERAPIST"]}>
                             <TherapistBlogEditor />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/therapist/appointments"
+                    element={
+                        <ProtectedRoute allowedRoles={["THERAPIST"]}>
+                            <TherapistAppointments />
                         </ProtectedRoute>
                     }
                 />
