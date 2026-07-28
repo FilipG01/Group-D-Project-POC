@@ -10,3 +10,15 @@ import { apiRequest } from "./apiClient";
           body: JSON.stringify(appointmentData),
       });
   }
+
+  export function confirmAppointment(appointmentId){
+    return apiRequest(`/api/appointments/${appointmentId}/confirm`, {
+        method: "PATCH",
+    });
+  }
+  export function cancelAppointment(appointmentId, cancellationReason){
+    return apiRequest(`/api/appointments/${appointmentId}/cancel`, {
+        method: "PATCH",
+        body: JSON.stringify({ cancellationReason }),
+    });
+  }

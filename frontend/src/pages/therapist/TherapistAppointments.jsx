@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { listAppointments } from "../../api/apiAppointments";
 import "../../styles/therapists/therapistAppointments.css";
+import {
+      listAppointments,
+      confirmAppointment,
+      cancelAppointment,
+} from "../../api/apiAppointments";
 
   function formatDateTime(value) {
       return new Intl.DateTimeFormat("en-IE", {
@@ -25,6 +29,9 @@ import "../../styles/therapists/therapistAppointments.css";
       const [appointments, setAppointments] = useState([]);
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState("");
+      const [actionError, setActionError] = useState("");
+      const [updatingAppointmentId, setUpdatingAppointmentId] = useState(null);
+      const [cancelReasons, setCancelReasons] = useState({});
 
       useEffect(() => {
           async function loadAppointments() {
@@ -50,6 +57,62 @@ import "../../styles/therapists/therapistAppointments.css";
 
           loadAppointments();
       }, []);
+
+      function updateAppointmentInState(updatedAppointment) {
+          setAppointments((currentAppointments) =>
+              currentAppointments.map((appointment) =>
+                  appointment.id === updatedAppointment.id
+                      ? updatedAppointment
+                      : appointment
+              )
+          );
+      }
+
+      async function handleConfirm(appointmentId) {
+          setActionError("");
+          setUpdatingAppointmentId(appointmentId);
+
+          try {
+              const updatedAppointment = await confirmAppointment(appointmentId);
+              updateAppointmentInState(updatedAppointment);
+          } catch (err) {
+              setActionError(err.message || "Could not confirm appointment");
+          } finally {
+              setUpdatingAppointmentId(null);
+          }
+      }
+
+      function handleCancelReasonChange(appointmentId, value) {
+          setCancelReasons((currentReasons) => ({
+              ...currentReasons,
+              [appointmentId]: value,
+          }));
+      }
+
+      async function handleCancel(appointmentId) {
+          const cancellationReason = cancelReasons[appointmentId]?.trim();
+
+          if (!cancellationReason) {
+              setActionError("Cancellation reason is required");
+              return;
+          }
+
+          setActionError("");
+          setUpdatingAppointmentId(appointmentId);
+
+          try {
+              const updatedAppointment = await cancelAppointment(
+                  appointmentId,
+                  cancellationReason
+              );
+
+              updateAppointmentInState(updatedAppointment);
+          } catch (err) {
+              setActionError(err.message || "Could not cancel appointment");
+          } finally {
+              setUpdatingAppointmentId(null);
+          }
+      }
 
       return (
           <main className="therapist-appointments-page">
@@ -77,6 +140,12 @@ import "../../styles/therapists/therapistAppointments.css";
                       {error}
                   </p>
               )}
+
+              {actionError && (
+                <p className="therapist-appointments-status therapist-appointments-error">
+                {actionError}
+                </p>
+               )}
 
               {!loading && !error && appointments.length === 0 && (
                   <section className="therapist-appointments-empty">
@@ -155,6 +224,61 @@ import "../../styles/therapists/therapistAppointments.css";
                                       <p>{appointment.clientNotes}</p>
                                   </div>
                               )}
+
+                              {appointment.cancellationReason && (
+                                  <div className="therapist-appointment-notes">
+                                      <p className="therapist-appointment-label">
+                                          Cancellation reason
+                                      </p>
+
+                                      <p>{appointment.cancellationReason}</p>
+                                  </div>
+                              )}
+
+                              {appointment.status === "REQUESTED" && (
+                                  <div className="therapist-appointment-actions">
+                                      <button
+                                          type="button"
+                                          onClick={() =>
+                                              handleConfirm(appointment.id)
+                                          }
+                                          disabled={
+                                              updatingAppointmentId ===
+                                              appointment.id
+                                          }
+                                      >
+                                          Confirm
+                                      </button>
+
+                                      <textarea
+                                          value={
+                                              cancelReasons[appointment.id] || ""
+                                          }
+                                          onChange={(event) =>
+                                              handleCancelReasonChange(
+                                                  appointment.id,
+                                                  event.target.value
+                                              )
+                                          }
+                                          placeholder="Cancellation reason"
+                                          rows="3"
+                                      />
+
+                                      <button
+                                          type="button"
+                                          onClick={() =>
+                                              handleCancel(appointment.id)
+                                          }
+                                          disabled={
+                                              updatingAppointmentId ===
+                                              appointment.id
+                                          }
+                                      >
+                                          Cancel
+                                      </button>
+                                  </div>
+                              )}
+
                           </article>
                       ))}
                   </section>

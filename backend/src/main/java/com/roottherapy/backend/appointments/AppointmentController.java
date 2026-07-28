@@ -45,7 +45,7 @@ public class AppointmentController {
     @PatchMapping("/{appointmentId}/cancel")
     public AppointmentResponse cancelAppointment(
             Authentication auth, @PathVariable UUID appointmentId,
-            @Valid@RequestBody CancelAppointmentRequest req
+            @Valid @RequestBody CancelAppointmentRequest req
     ){
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
         return appointmentService.cancelAppointment(
