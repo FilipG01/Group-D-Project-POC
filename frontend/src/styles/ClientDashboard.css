@@ -222,3 +222,130 @@
         padding: 14px;
     }
 }
+
+.client-appointments {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+  }
+
+  .client-appointments-header h2 {
+      margin: 0;
+      color: #2f352f;
+      font-size: 34px;
+      letter-spacing: 0;
+  }
+
+  .client-appointments-header p {
+      margin-top: 6px;
+      color: #6c7168;
+  }
+
+  .client-appointments-grid {
+      display: grid;
+      grid-template-columns: minmax(300px, 420px) 1fr;
+      gap: 24px;
+      margin-top: 24px;
+  }
+
+  .client-appointment-form,
+  .client-appointment-list {
+      padding: 24px;
+      border: 1px solid rgba(90, 100, 91, 0.14);
+      border-radius: 8px;
+      background: #fffaf1;
+  }
+
+  .client-appointment-form {
+      display: grid;
+      gap: 16px;
+  }
+
+  .client-appointment-form h3,
+  .client-appointment-list h3 {
+      margin: 0 0 8px;
+      color: #2f352f;
+  }
+
+  .client-appointment-form label {
+      display: grid;
+      gap: 7px;
+      color: #3f473f;
+      font-weight: 700;
+  }
+
+  .client-appointment-form input,
+  .client-appointment-form select,
+  .client-appointment-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(90, 100, 91, 0.24);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #2f352f;
+      font: inherit;
+      box-sizing: border-box;
+  }
+
+  .client-appointment-form textarea {
+      resize: vertical;
+  }
+
+  .client-appointment-form button {
+      min-height: 46px;
+      border: 0;
+      border-radius: 999px;
+      background: #5a645b;
+      color: #ffffff;
+      cursor: pointer;
+      font-weight: 700;
+  }
+
+  .client-appointment-form button:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+  }
+
+  .client-appointment-list {
+      display: grid;
+      align-content: start;
+      gap: 14px;
+  }
+
+  .client-appointment-card {
+      display: grid;
+      gap: 6px;
+      padding: 16px;
+      border: 1px solid rgba(90, 100, 91, 0.14);
+
+  .client-appointment-card span {
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #dce8d8;
+      color: #36533a;
+      font-size: 13px;
+      font-weight: 700;
+  }
+
+  .client-appointment-card p {
+      margin: 0;
+      color: #6c7168;
+  }
+
+  .client-appointments-error {
+      background: #f6dddd;
+      color: #7a2d2d;
+  }
+
+  .client-appointments-success {
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #dce8d8;
+      color: #36533a;
+  }
+
+  @media (max-width: 900px) {
+      .client-appointments-grid {
+          grid-template-columns: 1fr;
+      }
+  }
