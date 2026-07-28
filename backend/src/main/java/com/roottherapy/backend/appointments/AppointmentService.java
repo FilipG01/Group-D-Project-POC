@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -91,5 +92,48 @@ public class AppointmentService {
         }
 
         throw new AccessDeniedException("cannot view appointments");
+    }
+
+    public AppointmentResponse confirmAppointment(User currentUser, UUID appointmentId){
+        Appointment appointment = getTherapistAppointment(currentUser, appointmentId);
+
+        if(appointment.getStatus() != AppointmentStatus.REQUESTED){
+            throw new IllegalArgumentException("only requested appointments can be confirmed!");
+        }
+
+        appointment.setStatus(AppointmentStatus.CONFIRMED);
+        return AppointmentResponse.from(appointmentRepository.save(appointment));
+    }
+
+    public AppointmentResponse cancelAppointment(
+            User currentUser, UUID appointmentId, String cancellationReason
+    ){
+        Appointment appointment = getTherapistAppointment(currentUser, appointmentId);
+
+        if(appointment.getStatus() == AppointmentStatus.CANCELLED
+            || appointment.getStatus() == AppointmentStatus.COMPLETED
+            || appointment.getStatus() == AppointmentStatus.NO_SHOW){
+            throw new IllegalArgumentException("appointment cannot be cancelled");
+        }
+
+        appointment.setStatus(AppointmentStatus.CANCELLED);
+        appointment.setCancellationReason(cancellationReason.trim());
+        appointment.setCancelledAt(Instant.now());
+
+        return AppointmentResponse.from(appointmentRepository.save(appointment));
+    }
+
+    private Appointment getTherapistAppointment(User currentUser, UUID appointmentId){
+        if(currentUser.getRole() != UserRole.THERAPIST) {
+            throw new AccessDeniedException("only therapists can manage appointments");
+        }
+
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new IllegalArgumentException("appointment could not be found!"));
+
+        if(!appointment.getTherapist().getId().equals(currentUser.getId())) {
+            throw new AccessDeniedException("you do not have access to this appointment");
+        }
+        return appointment;
     }
 }
