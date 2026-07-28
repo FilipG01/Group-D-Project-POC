@@ -106,6 +106,7 @@ function Header() {
                             {user ? (
                                 <>
                                     <Menu.Item onClick={() => navigate(getDashboardPath())}>Dashboard</Menu.Item>
+                                    <Menu.Item onClick={() => navigate("/account/password")}>Change password</Menu.Item>
                                     <Menu.Item onClick={handleLogout}>Logout</Menu.Item>
                                 </>
                             ) : (

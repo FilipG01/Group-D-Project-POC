@@ -54,17 +54,28 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     margin-top: 22px;
     min-width: 210px;
     height: 50px;
     padding: 0 28px;
+
     border-radius: 999px;
-    background-color: #DDC4AD;
+    border: 2px solid #E0DEC5;
+
+    background-color: #E0DEC5;
     color: #5A645B;
+
     font-size: 20px;
     font-weight: 700;
     text-decoration: none;
     box-sizing: border-box;
+
+    transition:
+            background-color 0.25s ease,
+            color 0.25s ease,
+            border-color 0.25s ease,
+            transform 0.25s ease;
 }
 
 .footer-column {
@@ -84,24 +95,34 @@
 .footer-column a {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+
     width: fit-content;
     min-height: 42px;
-    padding: 0 14px;
-    border-radius: 14px;
-    border-bottom: 1px solid rgba(224, 222, 197, 0.25);
+    padding: 0 16px;
 
-    color: #FFFFFF;
+    margin-bottom: 10px;
+
+    border-radius: 14px;
+    border: 2px solid #E0DEC5;
+
+    background-color: #E0DEC5;
+    color: #5A645B;
+
     font-size: 17px;
+    font-weight: 600;
     text-decoration: none;
 
     transition:
             background-color 0.25s ease,
             color 0.25s ease,
+            border-color 0.25s ease,
             transform 0.25s ease;
 }
 
 .footer-column a:hover {
     background-color: #DDBE7D;
+    border-color: #DDBE7D;
     color: #1F1F1F;
     transform: translateY(-2px);
 }
@@ -112,12 +133,9 @@
 
 .footer-booking-button:hover {
     background-color: #DDBE7D;
+    border-color: #DDBE7D;
     color: #1F1F1F;
     transform: translateY(-2px);
-}
-
-.footer-booking-button:hover {
-    background-color: #DDBE7D;
 }
 
 .footer-bottom {

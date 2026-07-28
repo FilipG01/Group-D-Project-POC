@@ -8,6 +8,7 @@ import ClientSidebar from "../components/dashboard/ClientSidebar"
 import ClientMessages from "../components/dashboard/ClientMessages";
 import TherapistDirectory from "../components/dashboard/TherapistDirectory";
 import ClientProfileForm from "../components/dashboard/ClientProfileForm";
+import ClientAppointments from "../components/dashboard/ClientAppointments";
 
 import "../styles/ClientSidebar.css"
 import "../styles/ClientDashboard.css"
@@ -106,6 +107,11 @@ function ClientDashboard() {
     }
 
     function renderActiveSection(){
+
+        if(activeSection === "Appointments"){
+            return renderAppointmentsSection();
+        }
+
         if(activeSection === "Chat"){
             return renderMessageSection();
         }
@@ -114,6 +120,10 @@ function ClientDashboard() {
         }
 
         return renderDashboardSection();
+    }
+
+    function renderAppointmentsSection(){
+        return <ClientAppointments conversation={conversation} />;
     }
 
     return (

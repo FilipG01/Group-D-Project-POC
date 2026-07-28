@@ -1,10 +1,25 @@
-PUT http://localhost:8080/api/therapist-profile/me
-Content-Type: application/json
+PUT http://localhost:8080/api/therapist-profile/me/draft
+  Content-Type: application/json
 
-{
-  "qualifications": "MSc Counselling Psychology, IACP accredited",
-  "registrationNumber": "THER-001",
-  "yearsExperience": 5,
-  "bio": "I support clients with anxiety, stress, and life transitions.",
-  "acceptingClients": true
-}
+  {
+    "qualifications": "MSc Counselling and Psychotherapy, IACP Accredited",
+    "registrationNumber": "THER-POC-001",
+    "yearsExperience": 5,
+    "bio": "I work with clients experiencing anxiety, stress, low mood, and life transitions.",
+    "acceptingClients": true,
+    "profileImageUrl": "https://example.com/images/therapist-profile.jpg",
+    "publicBio": [
+      "I provide a calm, collaborative space for clients to explore what they are experiencing.",
+      "My approach combines person-centred therapy with practical coping strategies."
+    ],
+    "languages": [
+      "English"
+    ],
+    "specialisms": [
+      "Anxiety",
+      "Stress",
+      "Depression",
+      "Self-esteem"
+    ],
+    "version": 1
+  }

@@ -23,3 +23,9 @@ export function logout(){
 export function getCurrentUser(){
     return apiRequest("/api/auth/me");
 }
+export function changePassword(data) {
+    return apiRequest("/api/auth/password", {
+        method: "PUT",
+        body: JSON.stringify(data),
+    });
+}

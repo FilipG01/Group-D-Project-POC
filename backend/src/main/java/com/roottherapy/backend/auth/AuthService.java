@@ -3,6 +3,7 @@ package com.roottherapy.backend.auth;
 
 import com.roottherapy.backend.auth.dto.LoginRequest;
 import com.roottherapy.backend.auth.dto.RegisterClientRequest;
+import com.roottherapy.backend.auth.dto.ChangePasswordRequest;
 import com.roottherapy.backend.users.User;
 import com.roottherapy.backend.users.UserRole;
 import com.roottherapy.backend.users.UserService;
@@ -55,6 +56,23 @@ public class AuthService {
         user.setPhoneNumber(request.phoneNumber());
         User savedUser = userService.save(user);
         return UserResponse.from(savedUser);
+    }
+
+    public void changePassword(User authenticatedUser, ChangePasswordRequest request) {
+        if (!passwordEncoder.matches(request.currentPassword(), authenticatedUser.getPasswordHash())) {
+            throw new IllegalArgumentException("Current password is incorrect.");
+        }
+
+        if (!request.newPassword().equals(request.confirmNewPassword())) {
+            throw new IllegalArgumentException("New password and confirmation do not match.");
+        }
+
+        if (passwordEncoder.matches(request.newPassword(), authenticatedUser.getPasswordHash())) {
+            throw new IllegalArgumentException("New password must be different from the current password.");
+        }
+
+        authenticatedUser.setPasswordHash(passwordEncoder.encode(request.newPassword()));
+        userService.save(authenticatedUser);
     }
 
     public UserResponse login(LoginRequest request, HttpServletRequest httpReq, HttpServletResponse httpRes){
