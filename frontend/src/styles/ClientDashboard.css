@@ -223,6 +223,123 @@
     }
 }
 
+.therapist-directory {
+    width: min(100%, 1000px);
+    margin: 0 auto;
+}
+
+.therapist-directory-heading {
+    margin: 0.5rem 0 1rem;
+    color: #2f352f;
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.therapist-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: min(100%, 850px);
+    margin: 0 auto;
+}
+
+
+.therapist-card {
+    width:100%;
+    box-sizing: border-box;
+    background: #e3d7c1;
+    border: 1px solid rgba(90, 100, 91, 0.14);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 8px 20px rgba(47, 53, 47, 0.08);
+}
+
+
+.therapist-card-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+
+.therapist-avatar {
+    width: 80px;
+    height: 80px;
+    flex-shrink:0;
+    border-radius: 50%;
+    background: #ddc4ad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4f5d50;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+
+.therapist-card h3 {
+    margin: 0;
+    color: #2f352f;
+    font-size: 26px;
+}
+
+
+.therapist-card-details {
+    margin-bottom: 20px;
+    color: #4b564c;
+}
+
+
+.therapist-card-details p {
+    line-height: 1.6;
+    word-break: break-word;
+    color: #4b564c;
+}
+
+
+.therapist-button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 999px;
+    background: #4f5d50;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+
+.therapist-button:hover {
+    opacity: 0.9;
+}
+
+.therapist-info-section {
+    margin-bottom: 18px;
+}
+
+.therapist-info-section h4 {
+    margin: 0 0 6px;
+    color: #2f352f;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.therapist-info-section p {
+    margin: 0;
+    line-height: 1.6;
+    color: #4b564c;
+}
+
+.dashboard-title {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    color: #2f352f;
+    margin: 0 0 32px;
+    font-weight: 600;
+}
+
+
 .client-appointments {
       width: min(100%, 1100px);
       margin: 0 auto;
