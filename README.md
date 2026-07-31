@@ -41,6 +41,75 @@ CREATE DATABASE root_therapy;
 The backend uses Flyway, so database tables are created automatically from the migration files when
 the backend starts.
 
+### Database User Permissions
+
+• Use this in pgAdmin Query Tool or psql as the postgres user or another database owner/superuser. A limited app user usually cannot grant
+itself these permissions.
+
+Replace:
+- root_therapy_db with your database name
+- root_therapy_user with the username from your .env
+
+-- Root Therapy local development database permissions
+-- Run this as postgres / database owner, not as the limited app user.
+
+-- 1. Replace these names before running.
+-- Database: root_therapy_db
+-- User:     root_therapy_user
+
+-- 2. Allow the app user to connect to the database.
+```sql
+GRANT CONNECT, TEMPORARY
+ON DATABASE root_therapy_db
+TO root_therapy_user;
+
+ALTER DATABASE root_therapy_db
+OWNER TO root_therapy_user;
+OWNER TO root_therapy_user;
+
+-- 6. Required by the migrations for gen_random_uuid().
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- 7. Grant permissions on existing tables.
+-- This includes any already-created Flyway, Spring Session, or app tables.
+GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER
+ON ALL TABLES IN SCHEMA public
+TO root_therapy_user;
+
+-- 8. Grant permissions on existing sequences.
+GRANT USAGE, SELECT, UPDATE
+ON ALL SEQUENCES IN SCHEMA public
+TO root_therapy_user;
+
+-- 9. Grant permissions on existing functions.
+-- This helps with functions such as set_updated_at().
+GRANT EXECUTE
+ON ALL FUNCTIONS IN SCHEMA public
+TO root_therapy_user;
+
+-- 10. Grant permissions on future tables created in public.
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER
+ON TABLES
+TO root_therapy_user;
+
+-- 11. Grant permissions on future sequences created in public.
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT USAGE, SELECT, UPDATE
+ON SEQUENCES
+TO root_therapy_user;
+
+-- 12. Grant permissions on future functions created in public.
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT EXECUTE
+ON FUNCTIONS
+TO root_therapy_user;
+```
+
+This script is intended for local development. It gives the application database user enough permissions for Flyway to create
+extensions, tables, indexes, triggers, functions, Spring Session tables and future migrations. In production, permissions should be more
+restrictive and managed by a database administrator.
+
 Migration files are stored in:
 
 backend/src/main/resources/db/migration
