@@ -110,6 +110,163 @@ This script is intended for local development. It gives the application database
 extensions, tables, indexes, triggers, functions, Spring Session tables and future migrations. In production, permissions should be more
 restrictive and managed by a database administrator.
 
+### Optional: Create Local Admin And Therapist Accounts
+
+Registration through the website currently creates client accounts only. For local development, you can create an admin and therapist
+directly with SQL after the backend has run once and Flyway has created the tables.
+
+Run this in pgAdmin Query Tool or `psql` against your project database.
+
+Default login details created by this script:
+
+- Admin: `admin@roottherapy.local` / `AdminPass123!`
+- Therapist: `therapist@roottherapy.local` / `TherapistPass123!`
+
+```sql
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- Create or update local admin account.
+WITH inserted_admin AS (
+    INSERT INTO users (
+        email,
+        password_hash,
+        first_name,
+        last_name,
+        phone_number,
+        role,
+        account_status
+    )
+    SELECT
+        'admin@roottherapy.local',
+        crypt('AdminPass123!', gen_salt('bf', 10)),
+        'Local',
+        'Admin',
+        NULL,
+        'ADMIN',
+        'ACTIVE'
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM users
+        WHERE LOWER(email) = LOWER('admin@roottherapy.local')
+    )
+    RETURNING id
+),
+selected_admin AS (
+    SELECT id FROM inserted_admin
+    UNION
+    SELECT id
+    FROM users
+    WHERE LOWER(email) = LOWER('admin@roottherapy.local')
+),
+updated_admin AS (
+    UPDATE users
+    SET
+        role = 'ADMIN',
+        account_status = 'ACTIVE',
+        password_hash = crypt('AdminPass123!', gen_salt('bf', 10))
+    WHERE id IN (SELECT id FROM selected_admin)
+    RETURNING id
+)
+INSERT INTO admin_profiles (
+    user_id,
+    job_title,
+    department
+)
+SELECT
+    id,
+    'System Administrator',
+    'Operations'
+FROM updated_admin
+ON CONFLICT (user_id) DO UPDATE
+SET
+    job_title = EXCLUDED.job_title,
+    department = EXCLUDED.department;
+
+-- Create or update local therapist account.
+WITH inserted_therapist AS (
+    INSERT INTO users (
+        email,
+        password_hash,
+        first_name,
+        last_name,
+        phone_number,
+        role,
+        account_status
+    )
+    SELECT
+        'therapist@roottherapy.local',
+        crypt('TherapistPass123!', gen_salt('bf', 10)),
+        'Local',
+        'Therapist',
+        NULL,
+        'THERAPIST',
+        'ACTIVE'
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM users
+        WHERE LOWER(email) = LOWER('therapist@roottherapy.local')
+    )
+    RETURNING id
+),
+selected_therapist AS (
+    SELECT id FROM inserted_therapist
+    UNION
+    SELECT id
+    FROM users
+    WHERE LOWER(email) = LOWER('therapist@roottherapy.local')
+),
+updated_therapist AS (
+    UPDATE users
+    SET
+        role = 'THERAPIST',
+        account_status = 'ACTIVE',
+        password_hash = crypt('TherapistPass123!', gen_salt('bf', 10))
+    WHERE id IN (SELECT id FROM selected_therapist)
+    RETURNING id
+)
+INSERT INTO therapist_profiles (
+    user_id,
+    qualifications,
+    registration_number,
+    years_experience,
+    bio,
+    is_accepting_clients,
+    public_bio,
+    languages,
+    specialisms,
+    display_order,
+    is_publicly_visible
+)
+SELECT
+    id,
+    'MSc Counselling and Psychotherapy',
+    'LOCAL-THERAPIST-001',
+    5,
+    'Local therapist account for development and testing.',
+    TRUE,
+    '["Local development therapist profile."]'::jsonb,
+    '["English"]'::jsonb,
+    '["Anxiety", "Stress", "General wellbeing"]'::jsonb,
+    0,
+    TRUE
+FROM updated_therapist
+ON CONFLICT (user_id) DO UPDATE
+SET
+    qualifications = EXCLUDED.qualifications,
+    registration_number = EXCLUDED.registration_number,
+    years_experience = EXCLUDED.years_experience,
+    bio = EXCLUDED.bio,
+    is_accepting_clients = EXCLUDED.is_accepting_clients,
+    public_bio = EXCLUDED.public_bio,
+    languages = EXCLUDED.languages,
+    specialisms = EXCLUDED.specialisms,
+    display_order = EXCLUDED.display_order,
+    is_publicly_visible = EXCLUDED.is_publicly_visible;
+```
+
+This script is intended for local development only. It uses PostgreSQL `pgcrypto` to create BCrypt-compatible password hashes instead of
+storing plaintext passwords.
+
 Migration files are stored in:
 
 backend/src/main/resources/db/migration
